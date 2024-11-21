@@ -9,8 +9,6 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    # course.cpp \
-    # courserepository.cpp \
     main.cpp \
     user.cpp \
     student.cpp \
@@ -21,8 +19,6 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += mainwindow.h \
-    # course.h \
-    # courserepository.h \
     user.h \
     student.h \
     admin.h \
@@ -41,4 +37,3 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     courses-prerequisites.csv \
     courses.csv \
-    courses.txt
