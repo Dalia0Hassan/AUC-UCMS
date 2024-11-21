@@ -1,14 +1,16 @@
-#include "user.h"
-
 #ifndef UCMS_ADMIN_H
 #define UCMS_ADMIN_H
+
+#include <QString>
+#include "user.h"
+
 
 
 class Admin : public User {
 public:
-    Admin(string first_name, string last_name, string email, string phone_number);
+    Admin(QString first_name, QString last_name, QString email, QString phone_number);
     Admin();
-    string to_string();
+    QString to_QString();
     bool operator==(User u);
     bool operator!=(User u);
 };

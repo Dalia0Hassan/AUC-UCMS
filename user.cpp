@@ -1,8 +1,8 @@
-#include "headers/user.h"
-#include "headers/email.h"
+#include "user.h"
+#include "email.h"
 
-User::User(string username, string password, string first_name, string last_name, string email, string phone_number,
-               string address ){
+User::User(QString username, QString password, QString first_name, QString last_name, QString s, QString phone_number,
+               QString address ){
     this->username = username;
     this->password = password;
     this->first_name = first_name;
