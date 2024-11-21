@@ -1,8 +1,17 @@
+#include "mainwindow.h"
+#include <QApplication>
+#include <QObject>
+#include <QFile>
+#include <QTextStream>
+#include <QUuid>
 
-#include <iostream>
 
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
-int main(){
+    return a.exec();
 
-    std::cout << "Hello World" <<'\n' ;
 }
