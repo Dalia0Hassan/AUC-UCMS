@@ -17,6 +17,10 @@ enum Day {
     Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 };
 
+enum AdminType {
+    Instructor, TA
+};
+
 // Functions
 
 

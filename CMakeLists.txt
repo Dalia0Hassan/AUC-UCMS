@@ -1,25 +1,50 @@
 cmake_minimum_required(VERSION 3.29)
 project(UCMS)
 
+set(CMAKE_AUTOUIC ON)  # Enable automatic UIC
+set(CMAKE_AUTOMOC ON)  # Enable automatic MOC
+set(CMAKE_AUTORCC ON)  # Enable automatic RCC
+
+# Add your UI file
+set(SOURCES
+        main.cpp
+        mainwindow.cpp
+        email.cpp
+        event.cpp
+        student.cpp
+        admin.cpp
+        mainwindow.cpp
+        user.cpp
+)
+
+set(HEADERS
+        mainwindow.h
+        email.h
+        event.h
+        student.h
+        admin.h
+)
+
+set(UI_FILES
+        mainwindow.ui
+)
+
+# Add executable
+add_executable(UCMS ${SOURCES} ${HEADERS} ${UI_FILES})
+
 
 include_directories(.)
 
-add_executable(UCMS main.cpp
-        headers/utils.h
-        sources/utils.cpp
-
-        headers/email.h
-        sources/email.cpp
-
-        headers/user.h
-        sources/user.cpp
-
-        sources/event.cpp
-        headers/event.h
-
-        sources/student.cpp
-        headers/student.h
-        headers/student.h
+add_executable( main.cpp
+        mainwindow.cpp
+        mainwindow.h
+        email.h
+        email.cpp
+        event.cpp
+        event.h
+        mainwindow.ui
+        student.cpp
+        student.h
         admin.cpp
         admin.h
 

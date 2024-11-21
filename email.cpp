@@ -11,7 +11,7 @@ Email::Email() {
 Email::Email(QString email){
     set_email(email);
 }
-QString Email::get_email(){
+QString Email::get_email() const {
     return email ;
 }
 void Email::set_email(QString newEmail){
