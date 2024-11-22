@@ -1,2 +1,11 @@
 Id, Title,Description,Capacity,Location,Start Date ('y m d'),End Date ('y m d'),Start Time ('h m'),End Time ('h m'), Instructor Id, Days ('int int int ..')
-{7724d228-31db-4421-9807-6ac85e14ce75},"Introduction to Computer Science","An introductory course on programming, algorithms, and problem-solving.",50,"Building A, Room 101","2024 1 1","2023 5 30","9 0","10 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "0 3 5"
+"Introduction to Computer Science","An introductory course on programming, algorithms, and problem-solving.",50,"Building A, Room 101","2024 1 1","2023 5 30","9 0","10 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "0 3 5"
+"Data Structures and Algorithms","A course on advanced data structures and algorithms.","40","Building B, Room 201","2024 1 1","2023 5 30","11 0","12 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "1 4 6"
+"Web Development Bootcamp","A hands-on course on full-stack web development.","30","Building C, Room 301","2024 1 1","2023 5 30","13 0","14 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "2 5 6"
+"Machine Learning Fundamentals","A course on the basics of machine learning and data analysis.","40","Building D, Room 401","2024 1 1","2023 5 30","15 0","16 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "0 2 4"
+"Software Engineering Principles","A course on software design, development, and testing.","30","Building E, Room 501","2024 1 1","2023 5 30","17 0","18 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "1 3 5"
+"Cloud Computing Technologies","A course on cloud computing services and infrastructure.","20","Building F, Room 601","2024 1 1","2023 5 30","9 0","10 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "2 4 6"
+"Blockchain Fundamentals","A course on blockchain technology and decentralized applications.","25","Building G, Room 701","2024 1 1","2023 5 30","11 0","12 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "0 5 6"
+"Internet of Things (IoT)","A course on IoT devices, sensors, and data communication.","30","Building H, Room 801","2024 1 1","2023 5 30","13 0","14 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "1 2 4"
+"Cybersecurity Essentials","A course on cybersecurity principles and best practices.","20","Building I, Room 901","2024 1 1","2023 5 30","15 0","16 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "3 5 6"
+"Digital Marketing Strategies","A course on digital marketing tools, strategies, and analytics.","25","Building J, Room 1001","2024 1 1","2023 5 30","17 0","18 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "0 4 6"

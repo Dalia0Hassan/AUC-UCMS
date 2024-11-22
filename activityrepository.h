@@ -5,7 +5,7 @@
 #include "utils.h"
 class ActivityRepository
 {
-private:
+protected:
     ActivityType type;
     QString filename;
     QHash<QUuid, Activity*> container;
@@ -24,11 +24,6 @@ public:
     void update(Activity* activity);
     Activity* get_activity(QUuid id);
     QList<Activity*> get_all();
-
-
-    // Getters
-    ActivityType get_type() const;
-    const QHash<QUuid, Activity*>& get_data_container() const;
 };
 
 #endif // ACTIVITYREPOSITORY_H
