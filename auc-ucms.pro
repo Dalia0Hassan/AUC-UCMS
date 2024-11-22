@@ -48,5 +48,4 @@ DISTFILES += \
     courses.csv \
     events.csv
 
-RESOURCES += \
-    res.qrc
+RESOURCES +=
