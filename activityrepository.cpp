@@ -5,6 +5,9 @@
 #include <QFile>
 #include <QTextStream>
 #include <QString>
+#include <QSet>
+#include <QDir>
+#include <QCoreApplication>
 
 ActivityRepository::ActivityRepository(ActivityType type, QString filename) {
 
@@ -17,8 +20,10 @@ ActivityRepository::ActivityRepository(ActivityType type, QString filename) {
 
     // Make change and store
     load();
-    container.begin().value()->set_title("AUC ICPC Community Trivia Night");
-    store();
+    for(auto &activity : container)
+        qDebug() << activity->get_title();
+    // container.begin().value()->set_title("AUC ICPC Community Trivia Night Pro");
+    // store()
 
 }
 
@@ -28,18 +33,10 @@ ActivityRepository::~ActivityRepository() {
         delete activity;
 }
 
-const QHash<QUuid, Activity*>& ActivityRepository::get_data_container() const {
-    return container;
-}
-
-ActivityType ActivityRepository::get_type() const {
-    return type;
-}
-
 void ActivityRepository::load() {
 
-    // Open file
-    QFile file("D:/AUC/Semester Two/CSCE2 Lab/Final Project/AUC-UCMS/" + filename);
+    // Open file in resource file
+    QFile file(":/data/" + filename);
 
     // Check if file is open
     if (!file.open(QIODevice::ReadOnly))
@@ -66,6 +63,7 @@ void ActivityRepository::load() {
         QTime start_time = QTime(start_time_ist[0].toInt(), end_time_list[1].toInt());
         QTime end_time = QTime(end_time_list[0].toInt(), end_time_list[1].toInt());
 
+        qDebug() << filename;
         // Constructing the date
         QStringList start_date_list = row[ActivityDataRow::StartDate].split(" ");
         QStringList end_date_list = row[ActivityDataRow::EndDate].split(" ");
@@ -160,3 +158,25 @@ void ActivityRepository::store() {
     // Closing the file
     file.close();
 }
+
+
+void ActivityRepository::add(Activity* activity) {
+    container.insert(activity->get_id(), activity);
+}
+
+void ActivityRepository::remove(Activity* activity) {
+    container.remove(activity->get_id());
+}
+
+void ActivityRepository::update(Activity* activity) {
+    container.insert(activity->get_id(), activity);
+}
+
+Activity* ActivityRepository::get_activity(QUuid id) {
+    return container.value(id);
+}
+
+QList<Activity*> ActivityRepository::get_all() {
+    return container.values();
+}
+

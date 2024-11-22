@@ -1,0 +1,11 @@
+Id, Title,Description,Capacity,Location,Start Date ('y m d'),End Date ('y m d'),Start Time ('h m'),End Time ('h m'), Speaker Id
+{92acb5df-1f7c-49a6-a150-8f96d20abdbe},AUC ICPC Community Trivia Night Pro,An expo showcasing health products and wellness strategies.,150,Exhibition Hall B,2024 06 20,2024 06 21,09 00,18 00,{17a6688b-5909-48c1-8321-e6711f919dbd}
+{2c2bf27b-2214-4734-a02c-f15c258db2b2},Introduction to Blockchain,An introductory seminar on blockchain technology and applications.,75,Room C3,2024 05 25,2024 05 25,13 30,15 30,{a25c870e-8a39-4666-b7bd-c3faae1d74b8}
+{443bee1d-91d4-4dbd-b396-4119c3b992eb},AI Summit 2024,A conference discussing the latest advancements in Artificial Intelligence.,200,Conference Hall A,2024 05 15,2024 05 15,09 00,17 00,{f6b7daf3-a357-4f96-a18c-835f15914bbd}
+{e7e412e3-480a-479e-822a-fb195f53be48},Leadership Summit,A leadership-focused event with talks by industry leaders.,300,Grand Auditorium,2024 06 25,2024 06 26,09 30,17 30,{d57a0bad-164f-4d8d-9b9e-1b1a4752475d}
+{5e057939-f493-4ae6-8845-5feb1adc9601},Entrepreneurship Bootcamp,A program focused on startup development and business strategies.,30,Startup Lab,2024 06 10,2024 06 12,09 00,17 00,{1b1152bb-71c9-4078-81e7-4d4322c5fd01}
+{9437acc6-6207-48e3-951f-4e9f2998c41b},Quantum Computing Seminar,An in-depth session on quantum computing principles and advancements.,80,Lecture Hall 2,2024 06 15,2024 06 15,14 00,17 00,{fa21301b-567b-4ef3-a448-212214f1fdb9}
+{f170e307-7fb4-4321-9000-7e261841b047},AUC ICPC Community Trivia Night,A hands-on workshop on digital marketing strategies and tools.,50,Room B1,2024 05 20,2024 05 20,10 00,14 00,{d5276092-7fbe-4c9c-9d1e-9e3016262207}
+{fdc6a218-d271-4b49-84c7-f2052152ae3d},Photography Masterclass,Learn advanced photography techniques from a professional.,20,Photography Studio,2024 05 30,2024 05 30,12 00,15 00,{36cf50e9-83a3-486f-9bcb-e4935b5eb047}
+{e1ba9d35-98a2-4481-a80e-8dc5701b96b7},AUC ICPC Community Trivia Night,A discussion on sustainable practices and climate change mitigation.,100,Main Auditorium,2024 06 01,2024 06 01,11 00,16 00,{9bea0f65-f87c-4004-be48-563a24090215}
+{2cce7a5e-d218-494f-9a5f-85669a4961c5},Creative Writing Workshop,A workshop for aspiring writers to hone their storytelling skills.,25,Room D4,2024 06 05,2024 06 05,10 00,13 00,{3506f529-07cd-4c09-8a4d-8d3d6c3745b1}

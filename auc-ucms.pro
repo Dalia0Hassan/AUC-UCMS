@@ -44,6 +44,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    Events.csv \
     courses-prerequisites.csv \
     courses.csv \
+    events.csv
+
+RESOURCES += \
+    res.qrc

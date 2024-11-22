@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/data">
+        <file>courses.csv</file>
+        <file>courses-prerequisites.csv</file>
+        <file>events.csv</file>
+    </qresource>
+</RCC>

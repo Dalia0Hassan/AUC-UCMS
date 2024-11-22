@@ -9,8 +9,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-<<<<<<< HEAD
-=======
 
     // // Open the events.csv file and prepend a QUuid to each line
     // QFile file("D:/AUC/Semester Two/CSCE2 Lab/Final Project/AUC-UCMS/events.csv");
@@ -28,7 +26,6 @@ int main(int argc, char *argv[])
     //     // qDebug() << line;
     // }
 
->>>>>>> 1d722b1 (Finished storing logic)
     return a.exec();
 
 }
