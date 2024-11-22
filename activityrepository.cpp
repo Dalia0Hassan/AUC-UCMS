@@ -18,13 +18,6 @@ ActivityRepository::ActivityRepository(ActivityType type, QString filename) {
     // Initializing the container
     container = QHash<QUuid, Activity*>();
 
-    // Make change and store
-    load();
-    for(auto &activity : container)
-        qDebug() << activity->get_title();
-    // container.begin().value()->set_title("AUC ICPC Community Trivia Night Pro");
-    // store()
-
 }
 
 ActivityRepository::~ActivityRepository() {
@@ -63,7 +56,6 @@ void ActivityRepository::load() {
         QTime start_time = QTime(start_time_ist[0].toInt(), end_time_list[1].toInt());
         QTime end_time = QTime(end_time_list[0].toInt(), end_time_list[1].toInt());
 
-        qDebug() << filename;
         // Constructing the date
         QStringList start_date_list = row[ActivityDataRow::StartDate].split(" ");
         QStringList end_date_list = row[ActivityDataRow::EndDate].split(" ");

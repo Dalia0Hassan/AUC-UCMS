@@ -19,6 +19,7 @@ enum ActivityType {
     Course, Event
 };
 
+
 enum ActivityDataRow {
     Id, Title , Description, Capacity, Location, StartDate, EndDate, StartTime, EndTime
 };

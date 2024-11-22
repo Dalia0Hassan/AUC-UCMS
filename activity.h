@@ -50,6 +50,7 @@ private:
     // Friend classes
     friend class ActivityRepository;
     friend class CourseRepository;
+    friend class EventRepository;
 
 };
 
