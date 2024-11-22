@@ -123,20 +123,22 @@ void ActivityRepository::store() {
             class Course *course = dynamic_cast<class Course*>(activity);
             out << course->get_id().toString() << ","
                 << course->get_title() << ","
-                << course->get_description() << ","
+                << '"' << course->get_description() << '"' << ","
                 << course->get_capacity() << ","
                 << course->get_location() << ","
                 << course->get_start_date().toString("yyyy MM dd") << ","
                 << course->get_end_date().toString("yyyy MM dd") << ","
                 << course->get_start_time().toString("hh mm") << ","
                 << course->get_end_time().toString("hh mm") << ","
-                << course->get_instructor_id().toString() << ","
-                << course->get_days().size() << "\n";
+                << course->get_instructor_id().toString() << ",";
+                for(auto &day : course->get_days())
+                    out << day << " ";
+                out << "\n";
         } else {
             class Event* event = dynamic_cast<class Event*>(activity);
             out << event->get_id().toString() << ","
                 << event->get_title() << ","
-                << event->get_description() << ","
+                << '"' << event->get_description() << '"' << ","
                 << event->get_capacity() << ","
                 << event->get_location() << ","
                 << event->get_start_date().toString("yyyy MM dd") << ","
