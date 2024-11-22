@@ -15,26 +15,21 @@ class Course : public Activity
 {
 private:
     QUuid instructor_id;
-    QDate start_date, end_date;
     QSet<Day> days;
 public:
     Course(
-        QString title, QString description, QString location, QUuid id,
-        QUuid instructor_id, int capcity, QDate start_date,
-        QDate end_date, QSet<Day> days, QTime start_time, QTime end_time
+        QString title, QString description, QString location, int capcity, QUuid id,
+        QUuid instructor_id, QDate start_date,
+        QDate end_date, QTime start_time, QTime end_time, QSet<Day> days
     );
 
     // Getters
     QUuid get_instructor_id() const;
-    QDate get_start_date() const;
-    QDate get_end_date() const;
     QSet<Day> get_days() const;
 
 private:
     // Setters
     void set_instructor_id(QUuid);
-    void set_start_date(QDate);
-    void set_end_date(QDate);
     void set_days(QSet<Day>);
 
     // Friend classes

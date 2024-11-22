@@ -28,6 +28,7 @@ public:
 
     // Getters
     ActivityType get_type() const;
+    const QHash<QUuid, Activity*>& get_data_container() const;
 };
 
 #endif // ACTIVITYREPOSITORY_H

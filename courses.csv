@@ -1,3 +1,2 @@
-Id, Title,Description,Capacity,Location,Start Date ('y m d'),End Date ('y m d'),Days ('int int int ..'),Start Time ('h m'),End Time ('h m'), Instructor Id
-{7724d228-31db-4421-9807-6ac85e14ce75},"Introduction to Computer Science","An introductory course on programming, algorithms, and problem-solving.",50,"Building A, Room 101","2024 1 1","2023 5 30","0 3 5","9 0","10 30",{12345678}
-{09ccac78-48cf-44c8-b6ba-921107811d8e},"Introduction to Computer Science1","An introductory course on programming, algorithms, and problem-solving.",50,"Building A, Room 101","2024 1 1","2023 5 30","0 3 5","9 0","10 30",{12345678}
+Id, Title,Description,Capacity,Location,Start Date ('y m d'),End Date ('y m d'),Start Time ('h m'),End Time ('h m'), Instructor Id, Days ('int int int ..')
+{7724d228-31db-4421-9807-6ac85e14ce75},"Introduction to Computer Science","An introductory course on programming, algorithms, and problem-solving.",50,"Building A, Room 101","2024 1 1","2023 5 30","9 0","10 30",{36cccd20-447e-4317-a0a7-f6ec2dd546be}, "0 3 5"

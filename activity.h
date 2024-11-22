@@ -15,10 +15,11 @@ private:
     QString title, description, location;
     QUuid id;
     int capacity;
+    QDate start_date, end_date;
     QTime start_time, end_time;
 public:
     // Constructors and destructor
-    Activity(QString title, QString description, QString location, QUuid id, int capacity, QTime start_time, QTime end_time, ActivityType type);
+    Activity(QString title, QString description, QString location, int capacity, QUuid id, QDate start_date, QDate end_date, QTime start_time, QTime end_time, ActivityType type);
     virtual ~Activity() = 0;
 
     // Getters
@@ -27,6 +28,8 @@ public:
     QUuid get_id() const;
     QString get_location() const;
     int get_capacity() const;
+    QDate get_start_date() const;
+    QDate get_end_date() const;
     QTime get_start_time() const;
     QTime get_end_time() const;
     ActivityType get_type() const;
@@ -38,12 +41,15 @@ private:
     void set_id(QUuid);
     void set_location(QString);
     void set_capacity(int);
+    void set_start_date(QDate);
+    void set_end_date(QDate);
     void set_start_time(QTime);
     void set_end_time(QTime);
     void set_type(ActivityType);
 
     // Friend classes
-
+    friend class ActivityRepository;
+    friend class CourseRepository;
 
 };
 

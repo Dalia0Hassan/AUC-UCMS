@@ -9,13 +9,11 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-<<<<<<< HEAD
-=======
     activity.cpp \
     activityrepository.cpp \
     course.cpp \
     courserepository.cpp \
->>>>>>> 16651c3 (Introduced a base class (Activity) for Event and Course, Created respository for Activity and Course, Finished the logic for loading activities (courses/events))
+    eventrepository.cpp \
     main.cpp \
     user.cpp \
     student.cpp \
@@ -26,13 +24,11 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += mainwindow.h \
-<<<<<<< HEAD
-=======
     activity.h \
     activityrepository.h \
     course.h \
     courserepository.h \
->>>>>>> 16651c3 (Introduced a base class (Activity) for Event and Course, Created respository for Activity and Course, Finished the logic for loading activities (courses/events))
+    eventrepository.h \
     user.h \
     student.h \
     admin.h \
@@ -48,5 +44,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    Events.csv \
     courses-prerequisites.csv \
     courses.csv \

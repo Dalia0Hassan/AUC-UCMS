@@ -19,21 +19,28 @@ enum ActivityType {
     Course, Event
 };
 
+enum ActivityDataRow {
+    Id, Title , Description, Capacity, Location, StartDate, EndDate, StartTime, EndTime
+};
+
 enum CourseDataRow {
-    Id, Title , Description, Capacity, Location, StartDate, EndDate, Days, StartTime, EndTime, InstructorId
+    InstructorId = ActivityDataRow::EndTime + 1,
+    Days
+};
+
+enum EventDataRow {
+    SpeakerId = ActivityDataRow::EndTime + 1
 };
 
 enum Day {
     Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 };
 
-<<<<<<< HEAD
 enum AdminType {
     Instructor, TA
 };
-=======
+
 QStringList parseCsvLine(const QString &line);
->>>>>>> 16651c3 (Introduced a base class (Activity) for Event and Course, Created respository for Activity and Course, Finished the logic for loading activities (courses/events))
 
 // Functions
 

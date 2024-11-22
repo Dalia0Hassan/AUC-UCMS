@@ -2,13 +2,15 @@
 #include <QTime>
 
 // Constructors and destructor
-Activity::Activity(QString title, QString description, QString location, QUuid id, int capacity, QTime start_time, QTime end_time, ActivityType type)
+Activity::Activity(QString title, QString description, QString location, int capacity, QUuid id, QDate start_date, QDate end_date, QTime start_time, QTime end_time, ActivityType type)
 {
     set_title(title);
     set_description(description);
     set_location(location);
     set_id(id);
     set_capacity(capacity);
+    set_start_date(start_date);
+    set_end_date(end_date);
     set_start_time(start_time);
     set_end_time(end_time);
     set_type(type);
@@ -39,6 +41,14 @@ int Activity::get_capacity() const {
     return capacity;
 }
 
+QDate Activity::get_start_date() const {
+    return start_date;
+}
+
+QDate Activity::get_end_date() const {
+    return end_date;
+}
+
 QTime Activity::get_start_time() const {
     return start_time;
 }
@@ -67,6 +77,14 @@ void Activity::set_location(QString location) {
 
 void Activity::set_capacity(int capacity) {
     this->capacity = capacity;
+}
+
+void Activity::set_start_date(QDate date) {
+    this->start_date = date;
+}
+
+void Activity::set_end_date(QDate date) {
+    this->end_date = date;
 }
 
 void Activity::set_start_time(QTime time) {
