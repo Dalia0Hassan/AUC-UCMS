@@ -1,26 +1,25 @@
 #ifndef UCMS_EVENT_H
 #define UCMS_EVENT_H
 
+#include "activity.h"
 #include <QDateTime>
 
 
-class Event {
-    QString title , description;
-    QDateTime date_time ;
-    int capacity;
+class Event : public Activity
+{
+private:
+    QUuid speaker_id;
+public:
+    Event(QString title, QString description, QString location, int capcity, QUuid id,
+        QUuid speaker_id, QDate start_date, QDate end_date,
+          QTime start_time, QTime end_time);
 
-public :
-    Event ( QString , QString , QDateTime , int ) ;
-    QString get_title();
-    QString get_description();
-    QDateTime get_date_time();
-    int get_capacity();
-    void set_title(QString);
-    void set_description(QString);
-    void set_date_time(QDateTime);
+    // Getters
+    QUuid get_speaker_id() const;
 
-
-
+private:
+    // Setters
+    void set_speaker_id(QUuid speaker_id);
 };
 
 #endif //UCMS_EVENT_H

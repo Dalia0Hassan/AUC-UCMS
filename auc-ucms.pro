@@ -9,6 +9,11 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    activity.cpp \
+    activityrepository.cpp \
+    course.cpp \
+    courserepository.cpp \
+    eventrepository.cpp \
     main.cpp \
     user.cpp \
     student.cpp \
@@ -19,6 +24,11 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += mainwindow.h \
+    activity.h \
+    activityrepository.h \
+    course.h \
+    courserepository.h \
+    eventrepository.h \
     user.h \
     student.h \
     admin.h \
@@ -36,3 +46,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     courses-prerequisites.csv \
     courses.csv \
+    events.csv
+
+RESOURCES += \
+    res.qrc
