@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "courserepository.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -6,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    qDebug() << "Main Window Created";
+    CourseRepository course_repo;
 }
 
 MainWindow::~MainWindow()
