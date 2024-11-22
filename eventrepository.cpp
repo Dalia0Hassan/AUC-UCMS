@@ -1,4 +1,5 @@
 #include "eventrepository.h"
+#include "event.h"
 
 EventRepository::EventRepository() : ActivityRepository(ActivityType::Event, "events.csv") {
     // Testing CourseRepository
@@ -8,8 +9,9 @@ EventRepository::EventRepository() : ActivityRepository(ActivityType::Event, "ev
     for (auto &activity : activities)
         qDebug() << activity->get_title();
 
-    remove(activities[0]);
-    activities[1]->set_title("New Title");
+    // remove(activities[0]);
+    add(new class Event("Event 1", "Description 1", "Location 1", 10, QUuid::createUuid(), QUuid::createUuid(), QDate::currentDate(), QDate::currentDate(), QTime::currentTime(), QTime::currentTime()));
+    activities[1]->set_title("This is my title updated");
     update(activities[1]);
     store();
 }

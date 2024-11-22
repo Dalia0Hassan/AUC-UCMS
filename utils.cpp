@@ -1,4 +1,6 @@
 #include "utils.h"
+#include "qdir.h"
+#include <QCoreApplication>
 
 QStringList parseCsvLine(const QString &line) {
     QStringList fields;
@@ -18,4 +20,13 @@ QStringList parseCsvLine(const QString &line) {
     }
     fields.append(field.trimmed());  // Add the last field
     return fields;
+}
+
+
+QString getCurrentDir() {
+    QDir current_dir = QDir(QCoreApplication::applicationDirPath());
+    current_dir.cdUp();
+    current_dir.cdUp();
+    current_dir.cdUp();
+    return current_dir.absolutePath();
 }

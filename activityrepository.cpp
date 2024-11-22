@@ -8,6 +8,7 @@
 #include <QSet>
 #include <QDir>
 #include <QCoreApplication>
+#include <QDebug>
 
 ActivityRepository::ActivityRepository(ActivityType type, QString filename) {
 
@@ -29,11 +30,11 @@ ActivityRepository::~ActivityRepository() {
 void ActivityRepository::load() {
 
     // Open file in resource file
-    QFile file(":/data/" + filename);
+    QFile file(getCurrentDir() + "/" + filename);
 
     // Check if file is open
     if (!file.open(QIODevice::ReadOnly))
-        throw std::runtime_error("Could not open file");
+        throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
 
     // Read file
     QTextStream in(&file);
@@ -83,7 +84,7 @@ void ActivityRepository::load() {
         } else {
 
             // Event Object
-            activity = new  class Event(
+            activity = new class Event(
                 row[ActivityDataRow::Title], row[ActivityDataRow::Description], row[ActivityDataRow::Location],
                 row[ActivityDataRow::Capacity].toInt(), QUuid(row[ActivityDataRow::Id]), QUuid(row[EventDataRow::SpeakerId]),
                 start_date, end_date, start_time, end_time
@@ -101,11 +102,11 @@ void ActivityRepository::load() {
 void ActivityRepository::store() {
 
     // Open file
-    QFile file("D:/AUC/Semester Two/CSCE2 Lab/Final Project/AUC-UCMS/" + filename);
+    QFile file(getCurrentDir() + "/" + filename);
 
     // Check if file is open
-    if (!file.open(QIODevice::WriteOnly))
-        throw std::runtime_error("Could not open file");
+    if (!file.open(QIODevice::ReadWrite))
+        throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
 
     // Write to file
     QTextStream out(&file);
@@ -120,27 +121,33 @@ void ActivityRepository::store() {
     // Write the data
     for (auto &activity : container) {
         if (type == ActivityType::Course) {
+
+            // Dynamic Casting to a Course object
             class Course *course = dynamic_cast<class Course*>(activity);
+
+            // Writing to the file
             out << course->get_id().toString() << ","
-                << course->get_title() << ","
+                << '"' << course->get_title() << '"' << ","
                 << '"' << course->get_description() << '"' << ","
                 << course->get_capacity() << ","
-                << course->get_location() << ","
+                << '"' << course->get_location() << '"' << ","
                 << course->get_start_date().toString("yyyy MM dd") << ","
                 << course->get_end_date().toString("yyyy MM dd") << ","
                 << course->get_start_time().toString("hh mm") << ","
                 << course->get_end_time().toString("hh mm") << ","
                 << course->get_instructor_id().toString() << ",";
-                for(auto &day : course->get_days())
+                QSet<Day> days = course->get_days();
+                for(auto &day : days)
                     out << day << " ";
                 out << "\n";
+
         } else {
             class Event* event = dynamic_cast<class Event*>(activity);
             out << event->get_id().toString() << ","
-                << event->get_title() << ","
+                << '"' <<  event->get_title() << '"' << ","
                 << '"' << event->get_description() << '"' << ","
                 << event->get_capacity() << ","
-                << event->get_location() << ","
+                << '"' << event->get_location() << '"' << ","
                 << event->get_start_date().toString("yyyy MM dd") << ","
                 << event->get_end_date().toString("yyyy MM dd") << ","
                 << event->get_start_time().toString("hh mm") << ","
@@ -159,15 +166,31 @@ void ActivityRepository::add(Activity* activity) {
 }
 
 void ActivityRepository::remove(Activity* activity) {
-    container.remove(activity->get_id());
+    remove(activity->get_id());
+}
+
+void ActivityRepository::remove(QUuid id) {
+    if (!container.contains(id))
+        throw std::runtime_error("Activity not found");
+    container.remove(id);
 }
 
 void ActivityRepository::update(Activity* activity) {
     container.insert(activity->get_id(), activity);
 }
 
-Activity* ActivityRepository::get_activity(QUuid id) {
+Activity* ActivityRepository::get(QUuid id) {
+    if (!container.contains(id))
+        throw std::runtime_error("Activity not found");
+
     return container.value(id);
+}
+
+QList<Activity*> ActivityRepository::get(QList<QUuid> ids) {
+    QList<Activity*> activities;
+    for (auto &id : ids)
+        activities.append(get(id));
+    return activities;
 }
 
 QList<Activity*> ActivityRepository::get_all() {

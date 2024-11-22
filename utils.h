@@ -42,6 +42,7 @@ enum AdminType {
 };
 
 QStringList parseCsvLine(const QString &line);
+QString getCurrentDir();
 
 // Functions
 
