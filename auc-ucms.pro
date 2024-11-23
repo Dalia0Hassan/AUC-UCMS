@@ -12,6 +12,7 @@ SOURCES += \
     activity.cpp \
     activityrepository.cpp \
     app.cpp \
+    authenticationrepository.cpp \
     course.cpp \
     courserepository.cpp \
     eventrepository.cpp \
@@ -28,6 +29,7 @@ HEADERS += mainwindow.h \
     activity.h \
     activityrepository.h \
     app.h \
+    authenticationrepository.h \
     course.h \
     courserepository.h \
     eventrepository.h \
@@ -46,8 +48,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    admins-info.csv \
     courses-prerequisites.csv \
     courses.csv \
-    events.csv
+    events.csv \
+    students-info.csv \
+    users-auth.csv
 
 RESOURCES +=
