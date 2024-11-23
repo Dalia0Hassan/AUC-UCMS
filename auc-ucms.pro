@@ -17,6 +17,7 @@ SOURCES += \
     courserepository.cpp \
     enrollmentrepository.cpp \
     eventrepository.cpp \
+    instructor.cpp \
     main.cpp \
     user.cpp \
     student.cpp \
@@ -35,6 +36,7 @@ HEADERS += mainwindow.h \
     courserepository.h \
     enrollmentrepository.h \
     eventrepository.h \
+    instructor.h \
     user.h \
     student.h \
     admin.h \

@@ -3,6 +3,8 @@
 
 #include "quuid.h"
 #include "utils.h"
+#include "instructor.h"
+
 class EnrollmentRepository
 {
 public:
@@ -35,6 +37,9 @@ public:
     // Precondition: student_id is valid
     // Postcondition: returns a list of event ids that student_id is enrolled in
     QList<QUuid> get_student_events(QUuid student_id);
+
+    // (Not the right place, but for now)
+    QList<class Instructor> get_instructors();
 
 
     // QList<QUuid> get_passed_courses(QUuid student_id);

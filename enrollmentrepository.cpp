@@ -28,6 +28,24 @@ QList<QUuid> EnrollmentRepository::get_student_events(QUuid student_id) {
     return get_student_activities(student_id, ActivityType::EventType);
 }
 
+QList<class Instructor> EnrollmentRepository::get_instructors() {
+    QFile file(getCurrentDir() + "/instructors.csv");
+    if (!file.open(QIODevice::ReadOnly))
+        throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
+
+    QTextStream stream(&file);
+    QList<class Instructor> instructors;
+    while(!stream.atEnd()) {
+        QStringList row = stream.readLine().split(",");
+        class Instructor instructor(row[0], row[1]);
+        instructors.append(instructor);
+    }
+
+    file.close();
+    return instructors;
+
+}
+
 void EnrollmentRepository::enroll(QUuid student_id, QUuid activityId, ActivityType type) {
     QString filename = type == ActivityType::CourseType ? "students-courses.csv" : "students-events.csv";
     QFile file(getCurrentDir() + "/" + filename);
