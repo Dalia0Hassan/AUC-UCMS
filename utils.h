@@ -16,7 +16,7 @@ enum UserType {
 };
 
 enum ActivityType {
-    Course, Event
+    CourseType, EventType
 };
 
 

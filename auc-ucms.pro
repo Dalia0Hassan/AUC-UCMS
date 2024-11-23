@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     activity.cpp \
     activityrepository.cpp \
+    app.cpp \
     course.cpp \
     courserepository.cpp \
     eventrepository.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 HEADERS += mainwindow.h \
     activity.h \
     activityrepository.h \
+    app.h \
     course.h \
     courserepository.h \
     eventrepository.h \
