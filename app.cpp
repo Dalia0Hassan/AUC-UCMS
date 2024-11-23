@@ -16,6 +16,10 @@ App::~App() {
     // Save data before closing the app
     course_repository->store();
     event_repository->store();
+    delete course_repository;
+    delete event_repository;
+    delete course_manager;
+    delete event_manager;
 }
 
 // CRUD operations for events
