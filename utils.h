@@ -33,11 +33,29 @@ enum EventDataRow {
     SpeakerId = ActivityDataRow::EndTime + 1
 };
 
+enum UserAuthDataRow {
+    Username, Password, Email, Phone, UserId, Type
+};
+
+enum UserInfoDataRow {
+    UserID,Firstname,Lastname,Address
+};
+
+enum StudentDataRow {
+    Gpa = UserInfoDataRow::Address + 1,
+    StudentClassStanding
+};
+
+enum AdminDataRow {
+    Role = UserInfoDataRow::Address + 1,
+    Salary
+};
+
 enum Day {
     Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 };
 
-enum AdminType {
+enum AdminRole {
     Instructor, TA
 };
 
