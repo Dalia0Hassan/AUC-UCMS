@@ -5,7 +5,8 @@
 #include "user.h"
 #include "utils.h"
 #include <QString>
-
+// TODO : add this logic to the UsersManager class
+// TODO : instead Create interface load , store for reading and writing in the file
 class AuthenticationRepository
 {
 private:
