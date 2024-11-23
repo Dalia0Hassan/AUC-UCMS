@@ -15,7 +15,9 @@ SOURCES += \
     authenticationrepository.cpp \
     course.cpp \
     courserepository.cpp \
+    enrollmentrepository.cpp \
     eventrepository.cpp \
+    instructor.cpp \
     main.cpp \
     user.cpp \
     student.cpp \
@@ -32,7 +34,9 @@ HEADERS += mainwindow.h \
     authenticationrepository.h \
     course.h \
     courserepository.h \
+    enrollmentrepository.h \
     eventrepository.h \
+    instructor.h \
     user.h \
     student.h \
     admin.h \
@@ -52,6 +56,9 @@ DISTFILES += \
     courses-prerequisites.csv \
     courses.csv \
     events.csv \
+    instructors.csv \
+    students-courses.csv \
+    students-events.csv \
     students-info.csv \
     users-auth.csv
 
