@@ -9,6 +9,10 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    AdminCourseView.cpp \
+    AdminEventView.cpp \
+    StudentCourseView.cpp \
+    StudentEventView.cpp \
     activity.cpp \
     activityrepository.cpp \
     adminloginpage.cpp \
@@ -32,6 +36,10 @@ SOURCES += \
     dashboard.cpp
 
 HEADERS += mainwindow.h \
+    AdminCourseView.h \
+    AdminEventView.h \
+    StudentCourseView.h \
+    StudentEventView.h \
     activity.h \
     activityrepository.h \
     adminloginpage.h \
@@ -54,7 +62,11 @@ HEADERS += mainwindow.h \
     dashboard.h
 
 
-FORMS += mainwindow.ui\
+FORMS += mainwindow.ui \
+    AdminEventView.ui \
+    StudentCourseView.ui \
+    StudentEventView.ui \
+    admincourseview.ui \
     adminloginpage.ui \
 register.ui \
 admin_page.ui \
