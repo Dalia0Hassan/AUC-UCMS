@@ -1,10 +1,10 @@
 #include "mainwindow.h"
-#include "adminloginpage.h"
-#include "dashboard.h"
+#include "app.h"
 #include "ui_mainwindow.h"
 #include "register.h"
 #include "utils.h"
 
+extern App *app;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -41,7 +41,5 @@ void MainWindow::on_pushButton_Register_clicked()
 
 void MainWindow::on_pushButton_Login_clicked()
 {
-    hide();
-    Dashboard *Dashstudent= new Dashboard(this);
-    Dashstudent->show();
+    app->auth_manager->login(ui->lineEdit_username->text(), ui->lineEdit_password->text());
 }

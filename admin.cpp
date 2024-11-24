@@ -1,9 +1,8 @@
 #include "admin.h"
-#include "quuid.h"
 #include "user.h"
 
-Admin::Admin(QUuid id, QString username, QString password, QString first_name, QString last_name, QString email, QString address,
-             QString phone, AdminRole role, double salary ) : User(id, username, password,  first_name , last_name , email, phone, address) {
+Admin::Admin(QString id, QString username, QString password, QString first_name, QString last_name, QString email,
+             QString phone, AdminRole role, double salary ) : User(id, username, password,  first_name , last_name , email, phone) {
     set_salary(salary);
     set_role(role);
 }

@@ -15,7 +15,7 @@ public:
     explicit Register(QWidget *parent = nullptr);
     ~Register();
 
-private slots:
+public slots:
     void on_pushButton_clicked();
 
     void on_pushButton_register_clicked();
