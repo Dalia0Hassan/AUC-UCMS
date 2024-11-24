@@ -97,6 +97,25 @@ void AuthenticationRepository::signup(User* newUser) {
 
     file.close();
 
+    // Adding Id to students-courses.csv and students-events.csv
+    if (type == UserType::Student) {
+        file.setFileName(getCurrentDir() + "/students-courses.csv");
+        if (!file.open(QIODevice::Append))
+            throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
+        out.setDevice(&file);
+        out << newUser->get_id() << "\n";
+        file.close();
+
+        file.setFileName(getCurrentDir() + "/students-events.csv");
+        if (!file.open(QIODevice::Append))
+            throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
+        out.setDevice(&file);
+        out << newUser->get_id() << "\n";
+        file.close();
+    }
+
+    file.close();
+
 }
 
 void AuthenticationRepository::logout() {
@@ -154,6 +173,10 @@ void AuthenticationRepository::verifyCredentials(User *user, QFile &file) {
         if (row[UserAuthDataRow::Phone] == user->get_phone_number()) {
             file.close();
             throw std::runtime_error("Phone number already exists");
+        }
+        if (row[UserAuthDataRow::UserId] == user->get_id()) {
+            file.close();
+            throw std::runtime_error("User id already exists");
         }
     }
 
