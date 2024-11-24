@@ -54,11 +54,11 @@ HEADERS += mainwindow.h \
     dashboard.h
 
 
-FORMS += mainwindow.ui\
+FORMS += mainwindow.ui \
     adminloginpage.ui \
-register.ui \
-admin_page.ui \
-dashboard.ui
+    register.ui \
+    admin_page.ui \
+    dashboard.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
