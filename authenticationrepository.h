@@ -14,7 +14,7 @@ public:
     AuthenticationRepository();
 
     // Logic
-    User* login(QString username, QString password);
+    void login(QString username, QString password);
     void logout();
     void signup(User* newUser);
 

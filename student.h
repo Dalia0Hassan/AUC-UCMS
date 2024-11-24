@@ -10,8 +10,8 @@ class Student : public User {
 public :
 
     // Constructor
-    Student(QUuid id, QString username, QString password, QString first_name, QString last_name, QString email,
-            QString phone_number,QString address, double gpa, enum ClassStanding class_standing);
+    Student(QString id, QString username, QString password, QString first_name, QString last_name, QString email,
+            QString phone_number, double gpa, enum ClassStanding class_standing);
 
 
     // Getters

@@ -13,8 +13,8 @@ AdminEventView::~AdminEventView()
     delete ui;
 }
 
-void AdminEventView::on_Events_TableWidget_cellActivated(int row, int column)
-{
+// void AdminEventView::on_Events_TableWidget_cellActivated(int row, int column)
+// {
 
-}
+// }
 

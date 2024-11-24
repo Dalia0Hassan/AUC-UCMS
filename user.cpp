@@ -2,16 +2,14 @@
 #include "email.h"
 #include <QUuid>
 
-User::User(QUuid id, QString username, QString password, QString first_name, QString last_name, QString email , QString phone_number,
-           QString address ){
+User::User(QString id, QString username, QString password, QString first_name, QString last_name, QString email , QString phone_number){
     set_email(email);
     set_username(username);
     set_password(password);
     set_phone_number(phone_number);
-    set_address(address);
     set_first_name(first_name);
     set_last_name(last_name);
-    this->id = QUuid(id);
+    this->id = id;
 
 }
 
@@ -38,10 +36,6 @@ void User::set_email(QString email) {
 // TODO : Ensure valid phone number + Unique phone number
 void User::set_phone_number(QString phone_number) {
     this->phone_number = phone_number;
-}
-
-void User::set_address(QString address) {
-    this->address = address;
 }
 
 void User::set_first_name(QString first_name) {
@@ -84,11 +78,8 @@ QString User::get_email() const {
 QString User::get_phone_number() const  {
     return phone_number;
 }
-QString User::get_address()const  {
-    return address;
-}
 
-QUuid User::get_id() const {
+QString User::get_id() const {
     return id;
 }
 
