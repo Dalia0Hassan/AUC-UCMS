@@ -1,6 +1,7 @@
 #ifndef APP_H
 #define APP_H
 
+#include "authenticationrepository.h"
 #include "courserepository.h"
 #include "eventrepository.h"
 #include "course.h"
@@ -37,16 +38,31 @@ class App
         QList<Event*> get_all();
 
     };
+    class AuthManager
+    {
+        App& app;
+    public:
+        explicit AuthManager(App& app); // Constructor
+        void login(QString, QString);
+        void signup(QString id, QString username, QString password, QString firstname, QString lastname, QString email, QString phone, QString type);
+        void logout();
+    };
 
 private:
     CourseRepository * course_repository;
     EventRepository * event_repository;
+    AuthenticationRepository * auth_repository;
+    QWidget *current_window;
 
 public:
     App();
     ~App();
     CourseManager * course_manager;
     EventManager * event_manager;
+    AuthManager * auth_manager;
+
+    void set_current_window(QWidget *window);
+    QWidget *get_current_window();
 
 
 };

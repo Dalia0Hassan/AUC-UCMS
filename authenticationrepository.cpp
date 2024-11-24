@@ -9,7 +9,7 @@
 
 AuthenticationRepository::AuthenticationRepository() {}
 
-User* AuthenticationRepository::login(QString username, QString password) {
+void AuthenticationRepository::login(QString username, QString password) {
     if (current_user != nullptr)
         throw std::runtime_error("User already logged in");
 
@@ -31,23 +31,23 @@ User* AuthenticationRepository::login(QString username, QString password) {
 
             if (row[UserAuthDataRow::Type].toInt() == UserType::Admin) {
                 current_user = new class Admin(
-                    QUuid(userInfo[UserInfoDataRow::UserID]), username, password,
+                    userInfo[UserInfoDataRow::UserID], username, password,
                     userInfo[UserInfoDataRow::Firstname], userInfo[UserInfoDataRow::Lastname],
-                    row[UserAuthDataRow::Email], userInfo[UserInfoDataRow::Address],
+                    row[UserAuthDataRow::Email],
                     row[UserAuthDataRow::Phone], AdminRole(row[AdminDataRow::Role].toInt()),
                     userInfo[AdminDataRow::Salary].toDouble()
                     );
             } else {
                 current_user = new class Student(
-                    QUuid(userInfo[UserInfoDataRow::UserID]), username, password,
+                    userInfo[UserInfoDataRow::UserID], username, password,
                     userInfo[UserInfoDataRow::Firstname], userInfo[UserInfoDataRow::Lastname],
-                    row[UserAuthDataRow::Email], userInfo[UserInfoDataRow::Address],
+                    row[UserAuthDataRow::Email],
                     row[UserAuthDataRow::Phone], userInfo[StudentDataRow::Gpa].toDouble(),
                     ClassStanding(userInfo[StudentDataRow::StudentClassStanding].toInt())
                     );
             }
 
-            return current_user;
+            return;
         }
 
     }
@@ -62,8 +62,6 @@ void AuthenticationRepository::signup(User* newUser) {
     // Verifying user credentials
     verifyCredentials(newUser, file);
 
-    qDebug() << "User credentials verified";
-    // return;
     // Writing Authentication data
     if (!file.open(QIODevice::Append))
         throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
@@ -78,7 +76,7 @@ void AuthenticationRepository::signup(User* newUser) {
     else
         type = UserType::Admin;
 
-    out << newUser->get_username() << "," << hashed_password << "," << newUser->get_email() << "," << newUser->get_phone_number() << "," << newUser->get_id().toString() << "," << type << "\n";
+    out << newUser->get_username() << "," << hashed_password << "," << newUser->get_email() << "," << newUser->get_phone_number() << "," << newUser->get_id() << "," << type << "\n";
     file.close();
 
 
@@ -91,10 +89,10 @@ void AuthenticationRepository::signup(User* newUser) {
 
     if (type == UserType::Admin) {
         class Admin* admin = dynamic_cast<class Admin*>(newUser);
-        out << admin->get_id().toString() << "," << admin->get_firstname() << "," << admin->get_lastname() << "," << '"' << admin->get_address() << '"' << "," << admin->get_salary() << "," << admin->get_role() << "\n";
+        out << admin->get_id() << "," << admin->get_firstname() << "," << admin->get_lastname() << "," << admin->get_salary() << "," << admin->get_role() << "\n";
     } else {
         class Student* student = dynamic_cast<class Student*>(newUser);
-        out << student->get_id().toString() << "," << student->get_firstname() << "," << student->get_lastname() << "," << '"' << student->get_address() << '"' << "," << student->get_gpa() << "," << student->get_class_standing() << "\n";
+        out << student->get_id() << "," << student->get_firstname() << "," << student->get_lastname() << "," << student->get_gpa() << "," << student->get_class_standing() << "\n";
     }
 
     file.close();
@@ -144,16 +142,22 @@ void AuthenticationRepository::verifyCredentials(User *user, QFile &file) {
     in.readLine();
 
     while(!in.atEnd()) {
-        qDebug() << "Reading row";
        QStringList row = parseCsvLine(in.readLine());
-       if (row[UserAuthDataRow::Username] == user->get_username())
-           throw std::runtime_error("Username already exists");
-       if (row[UserAuthDataRow::Email] == user->get_email())
-           throw std::runtime_error("Email already exists");
-       if (row[UserAuthDataRow::Phone] == user->get_phone_number())
-           throw std::runtime_error("Phone number already exists");
+        if (row[UserAuthDataRow::Username] == user->get_username()) {
+           file.close();
+            throw std::runtime_error("Username already exists");
+        }
+        if (row[UserAuthDataRow::Email] == user->get_email()) {
+            file.close();
+            throw std::runtime_error("Email already exists");
+        }
+        if (row[UserAuthDataRow::Phone] == user->get_phone_number()) {
+            file.close();
+            throw std::runtime_error("Phone number already exists");
+        }
     }
 
     file.close();
+
 
 }

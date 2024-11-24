@@ -38,16 +38,16 @@ enum UserAuthDataRow {
 };
 
 enum UserInfoDataRow {
-    UserID,Firstname,Lastname,Address
+    UserID,Firstname,Lastname
 };
 
 enum StudentDataRow {
-    Gpa = UserInfoDataRow::Address + 1,
+    Gpa = UserInfoDataRow::Lastname + 1,
     StudentClassStanding
 };
 
 enum AdminDataRow {
-    Role = UserInfoDataRow::Address + 1,
+    Role = UserInfoDataRow::Lastname + 1,
     Salary
 };
 

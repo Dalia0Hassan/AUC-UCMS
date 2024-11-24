@@ -8,7 +8,7 @@ class Admin : public User {
     AdminRole role;
     double salary;
 public:
-    Admin(QUuid id, QString username, QString password, QString first_name, QString last_name, QString email, QString address, QString phone, AdminRole role,  double salary);
+    Admin(QString id, QString username, QString password, QString first_name, QString last_name, QString email, QString phone, AdminRole role,  double salary);
 
     // Getters
     AdminRole get_role() const ;
