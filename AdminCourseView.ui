@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdminCourseView</class>
+ <widget class="QDialog" name="AdminCourseView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>578</width>
+    <height>413</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QTableWidget" name="AdminCourse_table">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>40</y>
+     <width>481</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>Course Title</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Capacity</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>#Registered Students</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Time</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Instructor</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>location</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="AddCourse_Button">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>320</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Add Course</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="EditCourse_Button">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>320</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Edit Selected Course</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="DeleteCourse_Button">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>320</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Delete Selected Course</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ShowPrerequisite_Button">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>320</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Show Prerequisites</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="AddPrerequisite_Button">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>320</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Add Prerequisites</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
