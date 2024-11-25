@@ -4,9 +4,12 @@
 #include "quuid.h"
 #include "utils.h"
 #include "instructor.h"
+#include <QHash>
 
 class EnrollmentRepository
 {
+private:
+    QHash<QUuid, class Instructor> instructors;
 public:
     EnrollmentRepository();
 
@@ -39,7 +42,8 @@ public:
     QList<QUuid> get_student_events(QString student_id);
 
     // (Not the right place, but for now)
-    QList<class Instructor> get_instructors();
+    QHash<QUuid, class Instructor>& get_instructors();
+    class Instructor get_instructor(QUuid id);
 
 
 private:

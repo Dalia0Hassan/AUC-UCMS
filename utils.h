@@ -62,6 +62,11 @@ enum AdminRole {
 QStringList parseCsvLine(const QString &line);
 QString getCurrentDir();
 
+// week days
+const QStringList days = {
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+};
+
 // Functions
 
 

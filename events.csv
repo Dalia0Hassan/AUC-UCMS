@@ -1,7 +1,3 @@
-id,title,description,capacity,location,date_time
-{e7a7014e-40d1-41f0-a2b9-7cd0dd2599ad},"Event 1","Description 1",10,"Location 1",2024 11 23,2024 11 23,03 25,03 25,{b3e4501d-8f2f-4e82-a39a-af2a40355f18}
-{f0208ca4-1fde-4b2f-86ae-86bbfc0cebdc},"This is my title updated","Description 1",10,"Location 1",2024 11 23,2024 11 23,04 21,04 21,{904467fd-3747-408e-b757-2191a20f3b17}
-{7e4caf38-b9d2-4094-9355-56ef8bc27c1b},"Event 1","Description 1",10,"Location 1",2024 11 23,2024 11 23,03 39,03 39,{58afa391-d227-4a81-aeb8-cdd37eeb12d2}
-{a28d3803-c3c9-47ff-b85d-06b983aba592},"Event 1","Description 1",10,"Location 1",2024 11 23,2024 11 23,04 19,04 19,{fc00a8d8-0829-4ed2-9d6e-6e4a18994645}
-{ffe7f582-e958-4213-8527-7c29c0adfee7},"This is my title updated","Description 1",10,"Location 1",2024 11 23,2024 11 23,03 51,03 51,{aa71f42e-f18a-4fde-aa59-9fc3a50790ee}
-{8b4cd361-20aa-4093-8f84-180aec4c26d5},"This is my title updated","Description 1",10,"Location 1",2024 11 23,2024 11 23,03 53,03 53,{bcb574c9-4de3-4245-b8b4-e6967afa8a70}
+id,title,description,capacity,location,start_date,end_date,start_time,end_time,instructor_id
+{e7a7014e-40d1-41f0-a2b9-7cd0dd2599ad},"AUC ICPC Community Trivia Night","This is just a description",10,"Location 1",2024 11 23,2024 11 23,03 25,03 25,{9208cdc2-274c-443e-9f0b-ac554773e3bf}
+{1bfc3af9-af6d-4ea3-b0f9-3e77c40f19ed},"Let us talk politics","This is just a description",10,"Location 1",2024 11 23,2024 11 23,03 25,03 25,{0d34effd-5289-412c-bb7a-e8381dca9add}

@@ -15,13 +15,17 @@ App::App() {
     event_repository = new EventRepository();
     event_repository->load();
     auth_repository = new AuthenticationRepository();
+    enrollment_repository = new EnrollmentRepository();
     event_manager =  new EventManager(*this);
     course_manager = new CourseManager(*this);
     auth_manager = new AuthManager(*this);
+    enrollment_manager = new EnrollmentManager(*this);
+    current_window = nullptr;
 }
 App::CourseManager::CourseManager(App &app) : app(app) {}
 App::EventManager::EventManager(App &app) : app(app ) {}
 App::AuthManager::AuthManager(App &app) : app(app) {}
+App::EnrollmentManager::EnrollmentManager(App &app) : app(app) {}
 
 App::~App() {
     // Save data before closing the app
@@ -151,7 +155,7 @@ void App::AuthManager::signup(QString id, QString username, QString password, QS
         app.current_window->hide();
         delete app.current_window;
 
-        app.current_window = new Dashboard();
+        app.current_window = new Dashboard(nullptr, type == "Student" ? UserType::Student : UserType::Admin);
         app.current_window->show();
 
 
@@ -171,6 +175,64 @@ void App::AuthManager::logout(){
         return;
     }
 
+}
+
+User *App::AuthManager::get_current_user(){
+    return app.auth_repository->get_current_user();
+}
+
+// EnrollmentManager
+QList<Course*> App::EnrollmentManager::get_student_courses(QString student_id){
+    QList<QUuid> courses_ids = app.enrollment_repository->get_student_courses(student_id);
+    QList<Course*> courses;
+    for (auto id : courses_ids){
+        Course* course = dynamic_cast<Course*>(app.course_repository->get(id));
+        if (course != nullptr){
+            courses.append(course);
+        }
+    }
+    return courses;
+}
+
+QList<Event*> App::EnrollmentManager::get_student_events(QString student_id){
+    QList<QUuid> events_ids = app.enrollment_repository->get_student_events(student_id);
+    QList<Event*> events;
+    for (auto id : events_ids){
+        Event* event = dynamic_cast<Event*>(app.event_repository->get(id));
+        if (event != nullptr){
+            events.append(event);
+        }
+    }
+    return events;
+}
+
+QList<class Instructor> App::EnrollmentManager::get_instructors(){
+    QHash<QUuid, class Instructor> instructors = app.enrollment_repository->get_instructors();
+    QList<class Instructor> result;
+    for (auto &instructor : instructors){
+        result.append(instructor);
+    }
+    return result;
+}
+
+class Instructor App::EnrollmentManager::get_instructor(QUuid id){
+    return app.enrollment_repository->get_instructor(id);
+}
+
+void App::EnrollmentManager::enroll_in_course(QString student_id, QUuid course_id){
+    app.enrollment_repository->enroll_in_course(student_id, course_id);
+}
+
+void App::EnrollmentManager::enroll_in_event(QString student_id, QUuid event_id){
+    app.enrollment_repository->enroll_in_event(student_id, event_id);
+}
+
+void App::EnrollmentManager::drop_course(QString student_id, QUuid course_id){
+    app.enrollment_repository->drop_course(student_id, course_id);
+}
+
+void App::EnrollmentManager::drop_event(QString student_id, QUuid event_id){
+    app.enrollment_repository->drop_event(student_id, event_id);
 }
 
 void App::set_current_window(QWidget *window){

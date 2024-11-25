@@ -3,6 +3,7 @@
 
 #include "authenticationrepository.h"
 #include "courserepository.h"
+#include "enrollmentrepository.h"
 #include "eventrepository.h"
 #include "course.h"
 #include "event.h"
@@ -46,12 +47,28 @@ class App
         void login(QString, QString);
         void signup(QString id, QString username, QString password, QString firstname, QString lastname, QString email, QString phone, QString type);
         void logout();
+        User* get_current_user();
+    };
+    class EnrollmentManager
+    {
+        App& app;
+    public:
+        explicit EnrollmentManager(App& app); // Constructor
+        void enroll_in_course(QString student_id, QUuid course_id);
+        void enroll_in_event(QString student_id, QUuid event_id);
+        void drop_course(QString student_id, QUuid course_id);
+        void drop_event(QString student_id, QUuid event_id);
+        QList<Course*> get_student_courses(QString student_id);
+        QList<Event*> get_student_events(QString student_id);
+        QList<class Instructor> get_instructors();
+        class Instructor get_instructor(QUuid id);
     };
 
 private:
     CourseRepository * course_repository;
     EventRepository * event_repository;
     AuthenticationRepository * auth_repository;
+    EnrollmentRepository * enrollment_repository;
     QWidget *current_window;
 
 public:
@@ -60,6 +77,7 @@ public:
     CourseManager * course_manager;
     EventManager * event_manager;
     AuthManager * auth_manager;
+    EnrollmentManager * enrollment_manager;
 
     void set_current_window(QWidget *window);
     QWidget *get_current_window();
