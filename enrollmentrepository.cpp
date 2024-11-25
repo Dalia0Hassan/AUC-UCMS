@@ -28,22 +28,33 @@ QList<QUuid> EnrollmentRepository::get_student_events(QString student_id) {
     return get_student_activities(student_id, ActivityType::EventType);
 }
 
-QList<class Instructor> EnrollmentRepository::get_instructors() {
+QHash<QUuid, class Instructor> &EnrollmentRepository::get_instructors() {
     QFile file(getCurrentDir() + "/instructors.csv");
     if (!file.open(QIODevice::ReadOnly))
         throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
 
     QTextStream stream(&file);
-    QList<class Instructor> instructors;
+    QHash<QUuid, class Instructor> result;
     while(!stream.atEnd()) {
         QStringList row = stream.readLine().split(",");
-        class Instructor instructor(row[0], row[1]);
-        instructors.append(instructor);
+        class Instructor instructor(QUuid(row[0]), row[1], row[2]);
+        result.insert(instructor.get_id(), instructor);
     }
 
     file.close();
+    instructors = result;
     return instructors;
 
+}
+
+class Instructor EnrollmentRepository::get_instructor(QUuid id) {
+    if (instructors.isEmpty())
+        get_instructors();
+
+    if (!instructors.contains(id))
+        throw std::runtime_error("Instructor not found");
+
+    return instructors[id];
 }
 
 void EnrollmentRepository::enroll(QString student_id, QUuid activityId, ActivityType type) {
