@@ -15,7 +15,6 @@ SOURCES += \
     StudentEventView.cpp \
     activity.cpp \
     activityrepository.cpp \
-    adminloginpage.cpp \
     app.cpp \
     authenticationrepository.cpp \
     course.cpp \
@@ -42,7 +41,6 @@ HEADERS += mainwindow.h \
     StudentEventView.h \
     activity.h \
     activityrepository.h \
-    adminloginpage.h \
     app.h \
     authenticationrepository.h \
     course.h \
@@ -67,7 +65,6 @@ FORMS += mainwindow.ui \
     StudentCourseView.ui \
     StudentEventView.ui \
     admincourseview.ui \
-    adminloginpage.ui \
     register.ui \
     admin_page.ui \
     dashboard.ui

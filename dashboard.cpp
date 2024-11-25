@@ -3,7 +3,8 @@
 #include "course.h"
 #include "qpushbutton.h"
 #include "ui_dashboard.h"
-#include "adminloginpage.h"
+
+#include "mainwindow.h"
 #include "utils.h"
 #include <QLabel>
 #include <QLayout>
@@ -94,23 +95,11 @@ Dashboard::Dashboard(QWidget *parent, UserType type)
 
     }
 
-    load_logout_button();
+    load_logout_button(this);
 
 }
 
-void Dashboard::load_logout_button()
-{
-    QPushButton *logout_button = new QPushButton("Logout", this);
-    logout_button->setGeometry(width() - 10, 10, 100, 30);
-    // Connect button to logout method
-    connect(logout_button, &QPushButton::clicked, this, [this](){
-        app->auth_manager->logout();  // Accessing AuthManager's logout function through App instance
-    });
-    // Open the login window
-    hide();
-    Adminloginpage *login = new Adminloginpage(this);
-    login->show();
-}
+
 
 
 Dashboard::~Dashboard()

@@ -18,7 +18,6 @@ public:
 
 private:
     Ui::Dashboard *ui;
-    void load_logout_button();
 };
 
 #endif // DASHBOARD_H
