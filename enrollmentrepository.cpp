@@ -4,20 +4,30 @@
 
 EnrollmentRepository::EnrollmentRepository() {}
 
+void EnrollmentRepository::load(QString student_id) {
+    load(student_id, ActivityType::CourseType);
+    load(student_id, ActivityType::EventType);
+}
+
+void EnrollmentRepository::store(QString student_id) {
+    store(student_id, ActivityType::CourseType);
+    store(student_id, ActivityType::EventType);
+}
+
 void EnrollmentRepository::enroll_in_course(QString student_id, QUuid course_id) {
-    enroll(student_id, course_id, ActivityType::CourseType);
+    courses.insert(course_id);
 }
 
 void EnrollmentRepository::enroll_in_event(QString student_id, QUuid event_id) {
-    enroll(student_id, event_id, ActivityType::EventType);
+    events.insert(event_id);
 }
 
 void EnrollmentRepository::drop_course(QString student_id, QUuid course_id) {
-    drop(student_id, course_id, ActivityType::CourseType);
+    courses.remove(course_id);
 }
 
 void EnrollmentRepository::drop_event(QString student_id, QUuid event_id) {
-    drop(student_id, event_id, ActivityType::EventType);
+    events.remove(event_id);
 }
 
 QList<QUuid> EnrollmentRepository::get_student_courses(QString student_id) {
@@ -88,6 +98,7 @@ void EnrollmentRepository::enroll(QString student_id, QUuid activityId, Activity
 }
 
 void EnrollmentRepository::drop(QString student_id, QUuid course_id, ActivityType type) {
+
     QString filename = type == ActivityType::CourseType ? "students-courses.csv" : "students-events.csv";
     QFile file(getCurrentDir() + "/" + filename);
 
@@ -121,6 +132,23 @@ void EnrollmentRepository::drop(QString student_id, QUuid course_id, ActivityTyp
 }
 
 QList<QUuid> EnrollmentRepository::get_student_activities(QString student_id, ActivityType type) {
+
+    qDebug() << "From Get" << courses.size() << events.size();
+    QList<QUuid> result;
+    if (type == ActivityType::CourseType) {
+        for(auto &course : courses)
+            result.append(course);
+    } else {
+        for(auto &event : events)
+            result.append(event);
+    }
+
+    return result;
+
+
+}
+
+void EnrollmentRepository::load(QString student_id, ActivityType type) {
     QString filename = type == ActivityType::CourseType ? "students-courses.csv" : "students-events.csv";
     QFile file(getCurrentDir() + "/" + filename);
 
@@ -137,9 +165,38 @@ QList<QUuid> EnrollmentRepository::get_student_activities(QString student_id, Ac
 
     file.close();
 
-    QList<QUuid> result;
-    for (int i = 1; i < activities.size(); i++)
-        result.append(QUuid(activities[i]));
+    for (int i = 1; i < activities.size(); i++) {
+        QUuid id = QUuid(activities[i]);
+        if (type == ActivityType::CourseType)
+            courses.insert(id);
+        else
+            events.insert(id);
+    }
 
-    return result;
+}
+
+void EnrollmentRepository::store(QString student_id, ActivityType type) {
+    QString filename = type == ActivityType::CourseType ? "students-courses.csv" : "students-events.csv";
+    QFile file(getCurrentDir() + "/" + filename);
+
+    if (!file.open(QIODevice::ReadWrite))
+        throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
+
+    // Write the new data
+    file.resize(0);
+    QTextStream stream(&file);
+    stream << "Id," << "Ids" << "\n";
+    stream << student_id << ",";
+    QStringList s;
+    if (type == ActivityType::CourseType) {
+        for(const QUuid &course : courses)
+            s.push_back(course.toString());
+    } else {
+        for(const QUuid &event : events)
+            s.push_back(event.toString());
+    }
+
+    stream << s.join(",") << '\n';
+
+    file.close();
 }

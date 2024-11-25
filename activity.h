@@ -19,8 +19,10 @@ private:
     QTime start_time, end_time;
 public:
     // Constructors and destructor
+    Activity() {};
     Activity(QString title, QString description, QString location, int capacity, QUuid id, QDate start_date, QDate end_date, QTime start_time, QTime end_time, ActivityType type);
     virtual ~Activity() = 0;
+
 
     // Getters
     QString get_title() const;

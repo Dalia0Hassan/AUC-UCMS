@@ -18,6 +18,7 @@ public:
 
 private:
     Ui::Dashboard *ui;
+    void display(UserType type);
 };
 
 #endif // DASHBOARD_H

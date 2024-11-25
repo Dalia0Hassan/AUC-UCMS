@@ -15,14 +15,18 @@ Dashboard::Dashboard(QWidget *parent, UserType type)
     , ui(new Ui::Dashboard)
 {
     ui->setupUi(this);
+    display(type);
 
+
+
+}
+
+void Dashboard::display(UserType type) {
     if (type == UserType::Student) {
         // Pull the courses and events from the app
         QList<Course*> courses = app->enrollment_manager->get_student_courses(app->auth_manager->get_current_user()->get_id());
         QList<Event*> events = app->enrollment_manager->get_student_events(app->auth_manager->get_current_user()->get_id());
 
-        qDebug() << "Courses: " << courses.size();
-        qDebug() << "Events: " << events.size();
         // Display courses and events dyanmically in their frames
         QFrame *frame_courses = ui->frame_courses;
         QVBoxLayout *frameLayout = new QVBoxLayout(frame_courses);
@@ -50,6 +54,11 @@ Dashboard::Dashboard(QWidget *parent, UserType type)
             childLayout2->addWidget(secondRow);
 
             QPushButton *btn = new QPushButton("Drop", frame_courses);
+            btn->setObjectName(course->get_id().toString());
+            // Handle when button is clicked
+            connect(btn, &QPushButton::clicked, [=](){
+                app->enrollment_manager->drop_course(app->auth_manager->get_current_user()->get_id(), QUuid(btn->objectName()));
+            });
             childLayout3->addWidget(btn);
 
             // Add child layouts to the frame's layout
@@ -92,8 +101,6 @@ Dashboard::Dashboard(QWidget *parent, UserType type)
         }
 
     }
-
-
 }
 
 Dashboard::~Dashboard()
