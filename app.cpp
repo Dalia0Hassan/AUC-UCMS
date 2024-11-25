@@ -105,9 +105,16 @@ void App::AuthManager::login(QString username, QString password){
             return;
         }
         app.auth_repository->login(username, password);
-        app.current_window->hide();
+
+        if ( app.current_window != nullptr){
+            app.current_window->hide();
+            qDebug() << "Hide current window" << '\n';
+            app.current_window->close();
+        }
         app.current_window = new Dashboard();
         app.current_window->show();
+        qDebug() << "Show Dashboard" << '\n';
+
 
     } catch (std::exception &e){
         QMessageBox::warning(app.current_window, "Error", e.what());
