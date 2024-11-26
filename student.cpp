@@ -2,7 +2,7 @@
 #include <QString>
 
 Student::Student(QString id, QString username, QString password, QString first_name, QString last_name, QString email,
-                 QString phone_number, double gpa, enum ClassStanding class_standing) : User(id, username, password, first_name, last_name, email, phone_number) {
+                 QString phone_number, double gpa, enum ClassStanding class_standing) : User(id, username, password, first_name, last_name, email, phone_number, UserType::Student) {
     set_gpa(gpa);
     set_class_standing(class_standing);
 }

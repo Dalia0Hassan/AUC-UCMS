@@ -2,7 +2,7 @@
 #include "user.h"
 
 Admin::Admin(QString id, QString username, QString password, QString first_name, QString last_name, QString email,
-             QString phone, AdminRole role, double salary ) : User(id, username, password,  first_name , last_name , email, phone) {
+             QString phone, AdminRole role, double salary ) : User(id, username, password,  first_name , last_name , email, phone, UserType::Admin) {
     set_salary(salary);
     set_role(role);
 }

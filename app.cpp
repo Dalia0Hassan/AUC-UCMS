@@ -1,4 +1,5 @@
 #include "app.h"
+#include "admin_page.h"
 #include "course.h"
 #include "dashboard.h"
 #include "event.h"
@@ -116,7 +117,10 @@ void App::AuthManager::login(QString username, QString password){
         if (app.current_window != nullptr)
             delete app.current_window;
 
-        app.current_window = new Dashboard();
+        if (app.auth_repository->get_current_user()->get_type() == Student)
+            app.current_window = new Dashboard();
+        else
+            app.current_window = new Admin_page();
         app.current_window->show();
 
     } catch (std::exception &e){
@@ -167,7 +171,11 @@ void App::AuthManager::signup(QString id, QString username, QString password, QS
             delete app.current_window;
         }
 
-        app.current_window = new Dashboard();
+        if (type == "Student") {
+            app.current_window = new Dashboard();
+        } else {
+            app.current_window = new Admin_page();
+        }
         app.current_window->show();
 
 
