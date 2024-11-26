@@ -1,6 +1,9 @@
 #include "admin_page.h"
 #include "ui_admin_page.h"
 #include "utils.h"
+#include "admincourseview.h"
+#include "admineventview.h"
+#include "createcourseview.h"
 
 Admin_page::Admin_page(QWidget *parent)
     : QDialog(parent)
@@ -37,12 +40,14 @@ Admin_page::~Admin_page()
 
 void Admin_page::on_pushButton_courses_clicked()
 {
-    // Send admin to the page where they can add a course
+    CreateCourseView *adminCourseView = new CreateCourseView(this);
+    adminCourseView->show();
 }
 
 
 void Admin_page::on_pushButton_events_clicked()
 {
-    // Send admin to the page where they can add an event
+    AdminEventView *adminEventView = new AdminEventView(this);
+    adminEventView->show();
 }
 

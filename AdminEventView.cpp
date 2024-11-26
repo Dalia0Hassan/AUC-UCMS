@@ -1,6 +1,7 @@
 #include "AdminEventView.h"
 #include "ui_AdminEventView.h"
 #include "utils.h"
+#include "createeventview.h"
 
 AdminEventView::AdminEventView(QWidget *parent)
     : QDialog(parent)
@@ -19,4 +20,12 @@ AdminEventView::~AdminEventView()
 // {
 
 // }
+
+
+void AdminEventView::on_AddEvent_Button_clicked()
+{
+    hide();
+    CreateEventView *createEventView = new CreateEventView(this);
+    createEventView->show();
+}
 
