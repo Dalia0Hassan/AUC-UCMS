@@ -16,6 +16,9 @@ public:
     explicit Dashboard(QWidget *parent = nullptr);
     ~Dashboard();
 
+private slots:
+    void on_commandLinkButtonCourseRegister_clicked();
+
 private:
     Ui::Dashboard *ui;
     void display();
