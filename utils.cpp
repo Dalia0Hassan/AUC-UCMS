@@ -48,15 +48,9 @@ void load_logout_button(QDialog* parent)
 {
     // Todo:Resolve memory leak
     auto *logout_button = new QPushButton("Logout", parent );
-    logout_button->setGeometry(app->get_current_window()->width()-100, 10, 100, 30);
+    logout_button->setGeometry(600, 10, 100, 30);
     // Connect button to logout method
-    app->get_current_window()->connect(logout_button, &QPushButton::clicked, parent, [parent](){
+    QObject::connect(logout_button, &QPushButton::clicked, [=](){
         app->auth_manager->logout();  // Accessing AuthManager's logout function through App instance
     });
-    // Open the login window
-    delete app->get_current_window() ;
-
-    auto *login = new MainWindow();
-    app->set_current_window(login);
-    login->show();
 }

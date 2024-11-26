@@ -4,16 +4,25 @@
 #include "quuid.h"
 #include "utils.h"
 #include "instructor.h"
-#include <QHash>
+#include <QSet>
 
 class EnrollmentRepository
 {
 private:
     QHash<QUuid, class Instructor> instructors;
+    QSet<QUuid> courses, events;
 public:
     EnrollmentRepository();
 
     // Logic
+
+    // Preconditions: none
+    // Postconditions: Data is loaded from the file
+    void load(QString student_id);
+
+    // Preconditions: none
+    // Postconditions: Data is stored in the file
+    void store(QString student_id);
 
     // Precondition: student_id and course_id are valid
     // Postcondition: student_id is enrolled in course_id (only validates if student exists)
@@ -47,6 +56,8 @@ public:
 
 
 private:
+    void load(QString student_id, ActivityType type);
+    void store(QString, ActivityType);
     void enroll(QString student_id, QUuid activityId, ActivityType type);
     void drop(QString student_id, QUuid activityId, ActivityType type);
     QList<QUuid> get_student_activities(QString student_id, ActivityType type);

@@ -1,3 +1,3 @@
-id,title,description,capacity,location,start_date,end_date,start_time,end_time,instructor_id
+id,title,description,capacity,location,date_time
 {e7a7014e-40d1-41f0-a2b9-7cd0dd2599ad},"AUC ICPC Community Trivia Night","This is just a description",10,"Location 1",2024 11 23,2024 11 23,03 25,03 25,{9208cdc2-274c-443e-9f0b-ac554773e3bf}
 {1bfc3af9-af6d-4ea3-b0f9-3e77c40f19ed},"Let us talk politics","This is just a description",10,"Location 1",2024 11 23,2024 11 23,03 25,03 25,{0d34effd-5289-412c-bb7a-e8381dca9add}
