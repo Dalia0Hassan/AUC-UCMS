@@ -19,6 +19,8 @@ SOURCES += \
     authenticationrepository.cpp \
     course.cpp \
     courserepository.cpp \
+    createcourseview.cpp \
+    createeventview.cpp \
     enrollmentrepository.cpp \
     eventrepository.cpp \
     instructor.cpp \
@@ -46,6 +48,8 @@ HEADERS += mainwindow.h \
     authenticationrepository.h \
     course.h \
     courserepository.h \
+    createcourseview.h \
+    createeventview.h \
     enrollmentrepository.h \
     eventrepository.h \
     instructor.h \
@@ -67,6 +71,8 @@ FORMS += mainwindow.ui \
     StudentCourseView.ui \
     StudentEventView.ui \
     admincourseview.ui \
+    createcourseview.ui \
+    createeventview.ui \
     register.ui \
     admin_page.ui \
     dashboard.ui \

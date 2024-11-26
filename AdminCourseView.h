@@ -2,6 +2,13 @@
 #define ADMINCOURSEVIEW_H
 
 #include <QDialog>
+#include <QLineEdit>
+#include <QLabel>
+#include <QLayout>
+#include <QVBoxLayout>
+#include <QComboBox>
+#include <QPushButton>
+#include <QDateEdit>
 
 namespace Ui {
 class AdminCourseView;
@@ -17,6 +24,7 @@ public:
 
 private:
     Ui::AdminCourseView *ui;
+
 };
 
 #endif // ADMINCOURSEVIEW_H

@@ -33,9 +33,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_Register_clicked()
 {
     hide();
-    Register*registerwindow= new Register(this);
+    Register * registerwindow= new Register(this);
     registerwindow->show();
-
 }
 
 
