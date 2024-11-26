@@ -121,6 +121,7 @@ void App::AuthManager::login(QString username, QString password){
             app.current_window = new Dashboard();
         else
             app.current_window = new Admin_page();
+        app.current_window->show();
 
     } catch (std::exception &e){
         QMessageBox::warning(app.current_window, "Error", e.what());
