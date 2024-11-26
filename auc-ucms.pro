@@ -23,6 +23,7 @@ SOURCES += \
     eventrepository.cpp \
     instructor.cpp \
     main.cpp \
+    studentprofile.cpp \
     user.cpp \
     student.cpp \
     admin.cpp \
@@ -48,6 +49,7 @@ HEADERS += mainwindow.h \
     enrollmentrepository.h \
     eventrepository.h \
     instructor.h \
+    studentprofile.h \
     user.h \
     student.h \
     admin.h \
@@ -67,7 +69,8 @@ FORMS += mainwindow.ui \
     admincourseview.ui \
     register.ui \
     admin_page.ui \
-    dashboard.ui
+    dashboard.ui \
+    studentprofile.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

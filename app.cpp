@@ -22,6 +22,7 @@ App::App() {
     course_manager = new CourseManager(*this);
     auth_manager = new AuthManager(*this);
     enrollment_manager = new EnrollmentManager(*this);
+
     current_window = nullptr;
 }
 App::CourseManager::CourseManager(App &app) : app(app) {}

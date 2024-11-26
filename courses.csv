@@ -2,4 +2,3 @@ id,title,description,capacity,location,start_date,end_date,days,start_time,end_t
 {4c9b3b3e-4b5f-4b7d-9f8f-4f4b9f4b7d9f},"PHYS1","Introduction to Physics",10,"Location 3",2024 11 23,2024 11 23,14 47,15 47,{bb539dd2-12ea-4c86-be4d-3ef78501c6c7},2 1 
 {ac1778e7-e58b-432c-bd05-2da0bbb0d3bc},"MATH1","Introduction to Mathematics",10,"Location 2",2024 11 23,2024 11 23,14 47,15 47,{f65e8031-c9b6-46e9-b338-3a62d7cbb5fe},4 2 3 
 {91990a7a-6499-4a0e-8d74-8d12f7bc1a8d},"CSCE1","Introduction to Computer Science",10,"Location 1",2024 11 23,2024 11 23,14 47,15 47,{8d1c0e04-de0c-4519-8837-7d24bee84fcf},1 0 
-2 
