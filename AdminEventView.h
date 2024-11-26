@@ -15,6 +15,9 @@ public:
     explicit AdminEventView(QWidget *parent = nullptr);
     ~AdminEventView();
 
+private slots:
+    void on_AddEvent_Button_clicked();
+
 private:
     Ui::AdminEventView *ui;
 };

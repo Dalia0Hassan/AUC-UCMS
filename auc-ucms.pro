@@ -15,15 +15,17 @@ SOURCES += \
     StudentEventView.cpp \
     activity.cpp \
     activityrepository.cpp \
-    adminloginpage.cpp \
     app.cpp \
     authenticationrepository.cpp \
     course.cpp \
     courserepository.cpp \
+    createcourseview.cpp \
+    createeventview.cpp \
     enrollmentrepository.cpp \
     eventrepository.cpp \
     instructor.cpp \
     main.cpp \
+    studentprofile.cpp \
     user.cpp \
     student.cpp \
     admin.cpp \
@@ -42,14 +44,16 @@ HEADERS += mainwindow.h \
     StudentEventView.h \
     activity.h \
     activityrepository.h \
-    adminloginpage.h \
     app.h \
     authenticationrepository.h \
     course.h \
     courserepository.h \
+    createcourseview.h \
+    createeventview.h \
     enrollmentrepository.h \
     eventrepository.h \
     instructor.h \
+    studentprofile.h \
     user.h \
     student.h \
     admin.h \
@@ -67,10 +71,12 @@ FORMS += mainwindow.ui \
     StudentCourseView.ui \
     StudentEventView.ui \
     admincourseview.ui \
-    adminloginpage.ui \
+    createcourseview.ui \
+    createeventview.ui \
     register.ui \
     admin_page.ui \
-    dashboard.ui
+    dashboard.ui \
+    studentprofile.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

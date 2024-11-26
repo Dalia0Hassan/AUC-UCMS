@@ -267,7 +267,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Already have an accound? log in</string>
+    <string>Already have an account? log in</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_login_page">

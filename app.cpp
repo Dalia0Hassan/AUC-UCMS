@@ -1,13 +1,14 @@
 #include "app.h"
+#include "admin_page.h"
 #include "course.h"
 #include "dashboard.h"
 #include "event.h"
 #include "admin.h"
+#include "mainwindow.h"
 #include "student.h"
 #include "utils.h"
 #include <QMessageBox>
 #include <QRegularExpression>
-
 App::App() {
     // Load data when the app starts
     course_repository = new  CourseRepository();
@@ -20,6 +21,7 @@ App::App() {
     course_manager = new CourseManager(*this);
     auth_manager = new AuthManager(*this);
     enrollment_manager = new EnrollmentManager(*this);
+
     current_window = nullptr;
 }
 App::CourseManager::CourseManager(App &app) : app(app) {}
@@ -37,6 +39,9 @@ App::~App() {
     delete course_manager;
     delete event_manager;
     delete auth_manager;
+    delete enrollment_manager;
+    delete current_window;
+
 }
 
 // CRUD operations for events
@@ -86,9 +91,10 @@ Course* App::CourseManager::get(QUuid id ) {
 }
 
 QList<Course*> App::CourseManager::get_all() {
+    QList<Activity*> activities = app.course_repository->get_all();
     QList<Course*> result ;
-    for ( auto course : app.event_repository->get_all()){
-        auto* c = dynamic_cast<Course*>(course);
+    for (auto activity : activities){
+        auto* c = dynamic_cast<Course*>(activity);
         if ( c != nullptr){
             result.append(c);
         }
@@ -104,9 +110,18 @@ void App::AuthManager::login(QString username, QString password){
             QMessageBox::warning(app.current_window, "Error", "All fields are required");
             return;
         }
+
         app.auth_repository->login(username, password);
+        app.enrollment_repository->load(app.auth_repository->get_current_user()->get_id());
+
         app.current_window->hide();
-        app.current_window = new Dashboard();
+        if (app.current_window != nullptr)
+            delete app.current_window;
+
+        if (app.auth_repository->get_current_user()->get_type() == Student)
+            app.current_window = new Dashboard();
+        else
+            app.current_window = new Admin_page();
         app.current_window->show();
 
     } catch (std::exception &e){
@@ -138,24 +153,30 @@ void App::AuthManager::signup(QString id, QString username, QString password, QS
         return;
     }
 
-    User *newUser;
     try {
         if (type == "Student") {
             // Create a new student
-            newUser = new class Student(
-                id, username, password, firstname, lastname, email, phone, 0.0, ClassStanding::Freshman
-                );
+            app.auth_repository->signup(new class Student(
+                                            id, username, password, firstname, lastname, email, phone, 0.0, ClassStanding::Freshman
+                                            ), type);
         } else {
             // Create a new admin
-            newUser = new class Admin(
-                id, username, password, firstname, lastname, email, phone, AdminRole::Instructor, 3000
-                );
+            app.auth_repository->signup(new class Admin(
+                                            id, username, password, firstname, lastname, email, phone, AdminRole::Instructor, 3000
+                                            ), type);
         }
-        app.auth_repository->signup(newUser);
-        app.current_window->hide();
-        delete app.current_window;
 
-        app.current_window = new Dashboard(nullptr, type == "Student" ? UserType::Student : UserType::Admin);
+
+        if (app.current_window != nullptr) {
+            app.current_window->hide();
+            delete app.current_window;
+        }
+
+        if (type == "Student") {
+            app.current_window = new Dashboard();
+        } else {
+            app.current_window = new Admin_page();
+        }
         app.current_window->show();
 
 
@@ -166,10 +187,19 @@ void App::AuthManager::signup(QString id, QString username, QString password, QS
 }
 
 void App::AuthManager::logout(){
+
     try {
-        app.auth_repository->logout();
         app.current_window->close();
-        delete app.current_window;
+        app.course_repository->store();
+        app.event_repository->store();
+        app.enrollment_repository->store(app.auth_repository->get_current_user()->get_id());
+        app.auth_repository->logout();
+
+        if (app.current_window != nullptr)
+            delete app.current_window;
+
+        app.current_window = new MainWindow();
+        app.current_window->show();
     } catch (std::exception &e){
         QMessageBox::warning(app.current_window, "Error", e.what());
         return;
@@ -229,10 +259,22 @@ void App::EnrollmentManager::enroll_in_event(QString student_id, QUuid event_id)
 
 void App::EnrollmentManager::drop_course(QString student_id, QUuid course_id){
     app.enrollment_repository->drop_course(student_id, course_id);
+    app.current_window->hide();
+    if (app.current_window != nullptr){
+        delete app.current_window;
+    }
+    app.current_window = new Dashboard(nullptr);
+    app.current_window->show();
 }
 
 void App::EnrollmentManager::drop_event(QString student_id, QUuid event_id){
     app.enrollment_repository->drop_event(student_id, event_id);
+    app.current_window->hide();
+    if (app.current_window != nullptr){
+        delete app.current_window;
+    }
+    app.current_window = new Dashboard(nullptr);
+    app.current_window->show();
 }
 
 void App::set_current_window(QWidget *window){

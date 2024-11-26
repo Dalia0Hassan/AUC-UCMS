@@ -119,13 +119,13 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>110</y>
+      <y>80</y>
       <width>271</width>
-      <height>41</height>
+      <height>71</height>
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:700; font-style:italic; color:#000000;&quot;&gt;Welcome to A+, your way to success.&lt;br/&gt;Please Enter your Information to log in:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:700; font-style:italic; color:#000000;&quot;&gt;Welcome to A+, The world's number &lt;br/&gt;one courses management system.&lt;br/&gt;Please Enter your Information to log in:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>

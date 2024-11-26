@@ -1,6 +1,14 @@
 #include "utils.h"
 #include "qdir.h"
 #include <QCoreApplication>
+#include <QDialog>
+#include <QPushButton>
+#include "mainwindow.h"
+#include "app.h"
+
+extern App *app;
+
+
 
 QStringList parseCsvLine(const QString &line) {
     QStringList fields;
@@ -34,4 +42,15 @@ QString getCurrentDir() {
     current_dir.cdUp();
 #endif
     return current_dir.absolutePath();
+}
+
+void load_logout_button(QDialog* parent)
+{
+    // Todo:Resolve memory leak
+    auto *logout_button = new QPushButton("Logout", parent );
+    logout_button->setGeometry(600, 10, 100, 30);
+    // Connect button to logout method
+    QObject::connect(logout_button, &QPushButton::clicked, [=](){
+        app->auth_manager->logout();  // Accessing AuthManager's logout function through App instance
+    });
 }

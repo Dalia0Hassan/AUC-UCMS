@@ -1,5 +1,6 @@
 #include "StudentEventView.h"
 #include "ui_StudentEventView.h"
+#include "utils.h"
 
 StudentEventView::StudentEventView(QWidget *parent)
     : QDialog(parent)
@@ -11,4 +12,5 @@ StudentEventView::StudentEventView(QWidget *parent)
 StudentEventView::~StudentEventView()
 {
     delete ui;
+    load_logout_button(this);
 }

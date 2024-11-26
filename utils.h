@@ -4,6 +4,7 @@
 #include <QString>
 #include <QStringList>
 #include <QList>
+#include <QDialog>
 
 
 // Enums
@@ -67,6 +68,7 @@ const QStringList days = {
     "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
 };
 
+void load_logout_button(QDialog* parent);
 // Functions
 
 

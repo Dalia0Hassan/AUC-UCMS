@@ -1,8 +1,9 @@
 #include "user.h"
 #include "email.h"
+#include "utils.h"
 #include <QUuid>
 
-User::User(QString id, QString username, QString password, QString first_name, QString last_name, QString email , QString phone_number){
+User::User(QString id, QString username, QString password, QString first_name, QString last_name, QString email , QString phone_number, UserType type){
     set_email(email);
     set_username(username);
     set_password(password);
@@ -10,7 +11,7 @@ User::User(QString id, QString username, QString password, QString first_name, Q
     set_first_name(first_name);
     set_last_name(last_name);
     this->id = id;
-
+    this->type = type;
 }
 
 User::~User() {
@@ -46,10 +47,6 @@ void User::set_last_name(QString last_name) {
     this->last_name = last_name;
 }
 
-
-
-
-
 // Getters
 QString User::get_firstname() {
     return first_name;
@@ -83,7 +80,9 @@ QString User::get_id() const {
     return id;
 }
 
-
+UserType User::get_type() const {
+    return type;
+}
 
 
 // Overloaded operators

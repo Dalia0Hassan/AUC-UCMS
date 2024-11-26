@@ -81,6 +81,7 @@ public:
 
     void set_current_window(QWidget *window);
     QWidget *get_current_window();
+    void load_logout_button();
 
 
 };

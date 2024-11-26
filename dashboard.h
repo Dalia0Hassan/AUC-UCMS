@@ -1,7 +1,7 @@
 #ifndef DASHBOARD_H
 #define DASHBOARD_H
 
-#include "utils.h"
+#include "qboxlayout.h"
 #include <QDialog>
 
 namespace Ui {
@@ -13,11 +13,17 @@ class Dashboard : public QDialog
     Q_OBJECT
 
 public:
-    explicit Dashboard(QWidget *parent = nullptr, UserType type = UserType::Student);
+    explicit Dashboard(QWidget *parent = nullptr);
     ~Dashboard();
+
+private slots:
+    void on_commandLinkButtonCourseRegister_clicked();
 
 private:
     Ui::Dashboard *ui;
+    void display();
+
+    QVBoxLayout *frameLayout = nullptr, *frameLayout2 = nullptr;
 };
 
 #endif // DASHBOARD_H
