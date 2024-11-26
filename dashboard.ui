@@ -74,6 +74,32 @@
     <enum>QFrame::Shadow::Raised</enum>
    </property>
   </widget>
+  <widget class="QCommandLinkButton" name="commandLinkButtonCourseRegister">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>0</y>
+     <width>172</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Go to registeration</string>
+   </property>
+  </widget>
+  <widget class="QCommandLinkButton" name="commandLinkButtonEventRegister">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>0</y>
+     <width>172</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Go to registeration</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

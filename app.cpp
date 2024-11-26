@@ -92,9 +92,10 @@ Course* App::CourseManager::get(QUuid id ) {
 }
 
 QList<Course*> App::CourseManager::get_all() {
+    QList<Activity*> activities = app.course_repository->get_all();
     QList<Course*> result ;
-    for ( auto course : app.event_repository->get_all()){
-        auto* c = dynamic_cast<Course*>(course);
+    for (auto activity : activities){
+        auto* c = dynamic_cast<Course*>(activity);
         if ( c != nullptr){
             result.append(c);
         }
