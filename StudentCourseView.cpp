@@ -13,6 +13,7 @@ StudentCourseView::StudentCourseView(QWidget* parent)
 
     // Connect the register button
     connect(ui->RegisterCourse_Button, &QPushButton::clicked, this, &StudentCourseView::onRegisterButtonClicked);
+    load_logout_button(this);
 }
 
 

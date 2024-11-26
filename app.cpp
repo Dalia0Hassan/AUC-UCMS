@@ -9,7 +9,6 @@
 #include "utils.h"
 #include <QMessageBox>
 #include <QRegularExpression>
-
 App::App() {
     // Load data when the app starts
     course_repository = new  CourseRepository();
