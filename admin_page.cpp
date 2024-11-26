@@ -26,6 +26,8 @@ Admin_page::Admin_page(QWidget *parent)
     } else {
         qDebug() << "Failed to load image: to-do-list.png";
     }
+
+    load_logout_button(this);
 }
 
 Admin_page::~Admin_page()
