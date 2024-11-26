@@ -1,11 +1,9 @@
 #include "app.h"
-#include "admin_page.h"
-#include "adminloginpage.h"
 #include "course.h"
 #include "dashboard.h"
 #include "event.h"
 #include "admin.h"
-#include "qpushbutton.h"
+#include "mainwindow.h"
 #include "student.h"
 #include "utils.h"
 #include <QMessageBox>
@@ -40,7 +38,6 @@ App::~App() {
     delete course_manager;
     delete event_manager;
     delete auth_manager;
-    delete auth_repository;
     delete enrollment_manager;
     delete current_window;
 
@@ -111,15 +108,15 @@ void App::AuthManager::login(QString username, QString password){
             QMessageBox::warning(app.current_window, "Error", "All fields are required");
             return;
         }
-        app.auth_repository->login(username, password);
-        app.current_window->hide();
 
-        if (dynamic_cast<class Student*>(app.auth_repository->get_current_user()) != nullptr){
-            app.enrollment_repository->load(app.auth_repository->get_current_user()->get_id());
-            app.current_window = new Dashboard(nullptr);
-        } else {
-            app.current_window = new Admin_page(nullptr);
-        }
+        app.auth_repository->login(username, password);
+        app.enrollment_repository->load(app.auth_repository->get_current_user()->get_id());
+
+        app.current_window->hide();
+        if (app.current_window != nullptr)
+            delete app.current_window;
+
+        app.current_window = new Dashboard();
         app.current_window->show();
 
     } catch (std::exception &e){
@@ -151,24 +148,26 @@ void App::AuthManager::signup(QString id, QString username, QString password, QS
         return;
     }
 
-    User *newUser;
     try {
         if (type == "Student") {
             // Create a new student
-            newUser = new class Student(
-                id, username, password, firstname, lastname, email, phone, 0.0, ClassStanding::Freshman
-                );
+            app.auth_repository->signup(new class Student(
+                                            id, username, password, firstname, lastname, email, phone, 0.0, ClassStanding::Freshman
+                                            ), type);
         } else {
             // Create a new admin
-            newUser = new class Admin(
-                id, username, password, firstname, lastname, email, phone, AdminRole::Instructor, 3000
-                );
+            app.auth_repository->signup(new class Admin(
+                                            id, username, password, firstname, lastname, email, phone, AdminRole::Instructor, 3000
+                                            ), type);
         }
-        app.auth_repository->signup(newUser);
-        app.current_window->hide();
-        delete app.current_window;
 
-        app.current_window = new Dashboard(nullptr, type == "Student" ? UserType::Student : UserType::Admin);
+
+        if (app.current_window != nullptr) {
+            app.current_window->hide();
+            delete app.current_window;
+        }
+
+        app.current_window = new Dashboard();
         app.current_window->show();
 
 
@@ -179,13 +178,19 @@ void App::AuthManager::signup(QString id, QString username, QString password, QS
 }
 
 void App::AuthManager::logout(){
+
     try {
-        app.auth_repository->logout();
         app.current_window->close();
         app.course_repository->store();
         app.event_repository->store();
-        // app.enrollment_repository->store(app.auth_repository->get_current_user()->get_id());
-        delete app.current_window;
+        app.enrollment_repository->store(app.auth_repository->get_current_user()->get_id());
+        app.auth_repository->logout();
+
+        if (app.current_window != nullptr)
+            delete app.current_window;
+
+        app.current_window = new MainWindow();
+        app.current_window->show();
     } catch (std::exception &e){
         QMessageBox::warning(app.current_window, "Error", e.what());
         return;
@@ -237,7 +242,6 @@ class Instructor App::EnrollmentManager::get_instructor(QUuid id){
 
 void App::EnrollmentManager::enroll_in_course(QString student_id, QUuid course_id){
     app.enrollment_repository->enroll_in_course(student_id, course_id);
-    app.enrollment_repository->store(app.auth_manager->get_current_user()->get_id());
 }
 
 void App::EnrollmentManager::enroll_in_event(QString student_id, QUuid event_id){
@@ -247,14 +251,21 @@ void App::EnrollmentManager::enroll_in_event(QString student_id, QUuid event_id)
 void App::EnrollmentManager::drop_course(QString student_id, QUuid course_id){
     app.enrollment_repository->drop_course(student_id, course_id);
     app.current_window->hide();
-    delete app.current_window;
+    if (app.current_window != nullptr){
+        delete app.current_window;
+    }
     app.current_window = new Dashboard(nullptr);
     app.current_window->show();
-    app.enrollment_repository->store(app.auth_manager->get_current_user()->get_id());
 }
 
 void App::EnrollmentManager::drop_event(QString student_id, QUuid event_id){
     app.enrollment_repository->drop_event(student_id, event_id);
+    app.current_window->hide();
+    if (app.current_window != nullptr){
+        delete app.current_window;
+    }
+    app.current_window = new Dashboard(nullptr);
+    app.current_window->show();
 }
 
 void App::set_current_window(QWidget *window){
@@ -264,18 +275,3 @@ void App::set_current_window(QWidget *window){
 QWidget *App::get_current_window(){
     return current_window;
 }
-
-
-// void App::load_logout_button()
-// {
-//     QPushButton *logout_button = new QPushButton("Logout", get_current_window());
-//     logout_button->setGeometry(get_current_window()->width() - 10, 10, 100, 30);
-//     // Connect button to logout method
-//     connect(logout_button, &QPushButton::clicked, this, [get_current_window()](){
-//         app->auth_manager->logout();  // Accessing AuthManager's logout function through App instance
-//     });
-//     // Open the login window
-//     get_current_window()->hide();
-//     Adminloginpage *login = new Adminloginpage(nullptr);
-//     login->show();
-// }

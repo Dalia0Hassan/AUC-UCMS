@@ -46,10 +46,6 @@ void User::set_last_name(QString last_name) {
     this->last_name = last_name;
 }
 
-
-
-
-
 // Getters
 QString User::get_firstname() {
     return first_name;

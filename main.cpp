@@ -15,5 +15,13 @@ int main(int argc, char *argv[])
     app = new App();
     app->set_current_window(w);
 
+    // app->auth_manager->signup(
+    //     "56565656",
+    //     "dfadsfadsfas",
+    //     "student",
+    //     "John",
+    //     "shit",
+    //     "shit@slkd.csdhlf", "378246283463278462", "Student");
+
     return a.exec();
 }

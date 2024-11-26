@@ -183,20 +183,32 @@ void EnrollmentRepository::store(QString student_id, ActivityType type) {
         throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
 
     // Write the new data
-    file.resize(0);
     QTextStream stream(&file);
-    stream << "Id," << "Ids" << "\n";
-    stream << student_id << ",";
-    QStringList s;
-    if (type == ActivityType::CourseType) {
-        for(const QUuid &course : courses)
-            s.push_back(course.toString());
-    } else {
-        for(const QUuid &event : events)
-            s.push_back(event.toString());
+    QStringList newData;
+    while(!stream.atEnd()) {
+        QString line = stream.readLine();
+        if (line.split(",")[0] == student_id) {
+            line = student_id;
+            if (type == ActivityType::CourseType) {
+                for(auto &course : courses)
+                    line += "," + course.toString();
+            } else {
+                for(auto &event : events)
+                    line += "," + event.toString();
+            }
+        }
+        newData.append(line);
     }
 
-    stream << s.join(",") << '\n';
+    // Write the new data
+    file.resize(0);
+    for (auto &line : newData)
+        stream << line << "\n";
+
+    if (type == ActivityType::CourseType)
+        courses.clear();
+    else
+        events.clear();
 
     file.close();
 }

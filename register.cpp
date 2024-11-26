@@ -1,10 +1,7 @@
 #include "register.h"
-#include "admin_page.h"
 #include "app.h"
 #include "ui_register.h"
 #include "mainwindow.h"
-#include "student.h"
-#include "admin.h"
 
 extern App *app;
 
@@ -18,13 +15,6 @@ Register::Register(QWidget *parent)
 Register::~Register()
 {
     delete ui;
-}
-
-void Register::on_pushButton_clicked()
-{
-    hide();
-    MainWindow*mainwindow= new MainWindow(this);
-    mainwindow->show();
 }
 
 
@@ -48,8 +38,13 @@ void Register::on_pushButton_register_clicked()
 
 void Register::on_pushButton_login_page_clicked()
 {
-    hide();
-    MainWindow *mainwindow= new MainWindow(this);
-    mainwindow->show();
+    if (app->get_current_window() != nullptr) {
+        app->get_current_window()->hide();
+        delete app->get_current_window();
+    }
+
+    app->set_current_window(new MainWindow());
+    app->get_current_window()->show();
 }
+
 

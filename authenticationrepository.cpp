@@ -26,9 +26,7 @@ void AuthenticationRepository::login(QString username, QString password) {
         QString hashed_password = QString(QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Md5).toHex());
         if (row[UserAuthDataRow::Username] == username && row[UserAuthDataRow::Password] == hashed_password) {
 
-            qDebug() << username << " " << row[UserAuthDataRow::Username] << " " << row[UserAuthDataRow::UserId];
-            QStringList userInfo = get_user_info(QUuid(row[UserAuthDataRow::UserId]), UserType(row[UserAuthDataRow::Type].toInt()));
-
+            QStringList userInfo = get_user_info(row[UserAuthDataRow::UserId], UserType(row[UserAuthDataRow::Type].toInt()));
             if (row[UserAuthDataRow::Type].toInt() == UserType::Admin) {
                 current_user = new class Admin(
                     userInfo[UserInfoDataRow::UserID], username, password,
@@ -47,16 +45,18 @@ void AuthenticationRepository::login(QString username, QString password) {
                     );
             }
 
+            qDebug() << current_user->get_username() << current_user->get_id();
             return;
         }
 
     }
 
+
     throw std::runtime_error("Invalid username or password");
 
 }
 
-void AuthenticationRepository::signup(User* newUser) {
+void AuthenticationRepository::signup(User* newUser, QString _type) {
     QFile file(getCurrentDir() + "/users-auth.csv");
 
     // Verifying user credentials
@@ -65,16 +65,13 @@ void AuthenticationRepository::signup(User* newUser) {
     // Writing Authentication data
     if (!file.open(QIODevice::Append))
         throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
+
     QTextStream out(&file);
     // Hash passowrd
     QString hashed_password = QString(QCryptographicHash::hash(newUser->get_password().toUtf8(), QCryptographicHash::Md5).toHex());
 
     // Get user type
-    UserType type;
-    if (dynamic_cast<class Student*>(newUser) != nullptr)
-        type = UserType::Student;
-    else
-        type = UserType::Admin;
+    UserType type = _type == "Student" ? UserType::Student : UserType::Admin;
 
     out << newUser->get_username() << "," << hashed_password << "," << newUser->get_email() << "," << newUser->get_phone_number() << "," << newUser->get_id() << "," << type << "\n";
     file.close();
@@ -95,23 +92,30 @@ void AuthenticationRepository::signup(User* newUser) {
         out << student->get_id() << "," << student->get_firstname() << "," << student->get_lastname() << "," << student->get_gpa() << "," << student->get_class_standing() << "\n";
     }
 
+    current_user = newUser;
+
     file.close();
 
     // Adding Id to students-courses.csv and students-events.csv
     if (type == UserType::Student) {
         file.setFileName(getCurrentDir() + "/students-courses.csv");
-        if (!file.open(QIODevice::Append))
+        if (!file.open(QIODevice::Append | QIODevice::Text)) {
             throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
-        out.setDevice(&file);
-        out << newUser->get_id() << "\n";
+        }
+
+        QTextStream coursesOut(&file);
+        coursesOut << newUser->get_id() << "\n";
         file.close();
 
         file.setFileName(getCurrentDir() + "/students-events.csv");
-        if (!file.open(QIODevice::Append))
+        if (!file.open(QIODevice::Append | QIODevice::Text)) {
             throw std::runtime_error(("Could not open file: " + file.fileName() + ", Error: " + file.errorString()).toStdString());
-        out.setDevice(&file);
-        out << newUser->get_id() << "\n";
+        }
+
+        QTextStream eventsOut(&file);
+        eventsOut << newUser->get_id() << "\n";
         file.close();
+
     }
 
     file.close();
@@ -130,10 +134,11 @@ User* AuthenticationRepository::get_current_user() {
     if (current_user == nullptr)
         throw std::runtime_error("No user logged in");
 
+
     return current_user;
 }
 
-QStringList AuthenticationRepository::get_user_info(QUuid id, UserType type) {
+QStringList AuthenticationRepository::get_user_info(QString id, UserType type) {
     QString path = type == UserType::Admin ? getCurrentDir() + "/admins-info.csv" : getCurrentDir() + "/students-info.csv";
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly))
@@ -144,7 +149,7 @@ QStringList AuthenticationRepository::get_user_info(QUuid id, UserType type) {
 
     while(!in.atEnd()) {
         QStringList row = parseCsvLine(in.readLine());
-        if (QUuid(row[UserInfoDataRow::UserID]) == id) {
+        if (row[UserInfoDataRow::UserID] == id) {
             return row;
         }
     }
@@ -182,5 +187,10 @@ void AuthenticationRepository::verifyCredentials(User *user, QFile &file) {
 
     file.close();
 
+}
 
+
+AuthenticationRepository::~AuthenticationRepository() {
+    if (current_user != nullptr)
+        delete current_user;
 }
